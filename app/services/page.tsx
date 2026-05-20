@@ -5,7 +5,7 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Card } from "@/components/ui/Card";
-import { services } from "@/content/services";
+import { getServicesForGroup, serviceGroups } from "@/content/service-groups";
 import { createMetadata } from "@/lib/seo";
 import { breadcrumbSchema } from "@/lib/schema";
 
@@ -28,18 +28,22 @@ export default function ServicesPage() {
       />
       <section className="section-padding bg-background">
         <div className="container-site grid gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:gap-6">
-          {services.map((service) => (
-            <Card key={service.slug} className="flex h-full flex-col lg:p-7">
-              <service.icon className="h-7 w-7 text-teal" aria-hidden="true" />
-              <h2 className="mt-5 text-xl font-semibold text-charcoal">{service.title}</h2>
-              <p className="mt-3 flex-1 text-sm leading-6 text-muted-text">{service.description}</p>
-              <Link
-                href={`/services/${service.slug}`}
-                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-teal hover:text-charcoal"
-              >
-                View service
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
+          {serviceGroups.map((group) => (
+            <Card key={group.title} className="flex h-full flex-col lg:p-7">
+              <h2 className="text-xl font-semibold text-charcoal">{group.title}</h2>
+              <p className="mt-3 flex-1 text-sm leading-6 text-muted-text">{group.description}</p>
+              <div className="mt-6 space-y-3">
+                {getServicesForGroup(group).map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="flex min-h-11 items-center justify-between gap-3 rounded-md border border-border bg-muted-bg px-4 py-3 text-sm font-semibold text-charcoal transition hover:border-teal hover:text-teal"
+                  >
+                    <span>{service.title}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  </Link>
+                ))}
+              </div>
             </Card>
           ))}
         </div>

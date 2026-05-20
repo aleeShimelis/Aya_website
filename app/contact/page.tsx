@@ -69,7 +69,8 @@ export default function ContactPage() {
                 Appointment request
               </h2>
               <p className="mt-3 text-muted-text">
-                Staff should confirm availability before your appointment is final.
+                Appointment requests are reviewed by the clinic team. For urgent concerns, please
+                call directly. Staff should confirm availability before your appointment is final.
               </p>
             </div>
             <AppointmentForm />
