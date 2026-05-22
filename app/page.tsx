@@ -9,7 +9,7 @@ import { ServicesPreview } from "@/components/sections/ServicesPreview";
 import { TeamPreview } from "@/components/sections/TeamPreview";
 import { TestimonialsPlaceholder } from "@/components/sections/TestimonialsPlaceholder";
 import { TrustStrip } from "@/components/sections/TrustStrip";
-import { VirtualTourPreview } from "@/components/sections/VirtualTourPreview";
+import { InsideStudioTour } from "@/components/sections/InsideStudioTour";
 import { WhyPatientsChooseAya } from "@/components/sections/WhyPatientsChooseAya";
 import { createMetadata } from "@/lib/seo";
 
@@ -28,9 +28,9 @@ export default function HomePage() {
       <AboutStudio />
       <ServicesPreview />
       <WhyPatientsChooseAya />
+      <InsideStudioTour />
       <CareStages />
       <TeamPreview />
-      <VirtualTourPreview />
       <PatientJourney />
       <TestimonialsPlaceholder />
       <FaqPreview />

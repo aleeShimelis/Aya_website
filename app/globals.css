@@ -216,6 +216,10 @@ button {
   min-height: inherit;
 }
 
+.tour-viewer-viewport {
+  height: 20rem;
+}
+
 @media (min-width: 768px) {
   .container-site,
   .container-narrow {
@@ -232,6 +236,10 @@ button {
 
   .hero-grid {
     padding-block: 4.5rem;
+  }
+
+  .tour-viewer-viewport {
+    height: 26.25rem;
   }
 }
 
@@ -251,6 +259,10 @@ button {
 
   .hero-grid {
     padding-block: 5.5rem;
+  }
+
+  .tour-viewer-viewport {
+    height: 32.5rem;
   }
 }
 
@@ -291,6 +303,10 @@ button {
 
   .hero-title {
     font-size: 4.25rem;
+  }
+
+  .tour-viewer-viewport {
+    height: 38.75rem;
   }
 }
 

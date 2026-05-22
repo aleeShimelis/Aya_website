@@ -342,7 +342,10 @@ transition-timing-function: ease;
 - Staff consent is required before going live.
 - No patients visible without written consent.
 - Treatment room is acceptable only if clean, staged, and not intimidating.
-- The homepage must use a static preview image and must not load the viewer bundle.
+- There is no separate `/virtual-tour` page.
+- The homepage includes one embedded lazy-loaded 360 viewer section using `/images/virtual-tour/aya-reception-360.jpg`.
+- The 360 viewer must not load above the fold or inside the initial hero bundle.
+- The viewer must show a static poster/loading state until the section nears the viewport.
 
 ## 10. Favicon And App Icons
 
@@ -387,6 +390,8 @@ TODO:
 - Border radii, shadows, spacing, and typography must follow the tokens and rules in this document.
 - UI must be reviewed against this design system before the final response.
 - The final build must not look like a generic AI-generated healthcare template. It should feel specific to Aya Dental Studio: calm, premium, clinical, trustworthy, and restrained.
+- The desktop navbar must use three clear zones: logo/brand, grouped navigation, and contact CTAs.
+- The navbar no longer includes a 360 route; the homepage owns the embedded studio preview.
 
 ## 14. Security Implementation Requirements
 

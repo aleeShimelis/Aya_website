@@ -2,15 +2,26 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, Phone, X } from "lucide-react";
 import { primaryNavigation } from "@/content/navigation";
 import { contactActions } from "@/lib/constants";
 import { ButtonLink } from "@/components/ui/Button";
+import { cn } from "@/lib/utils";
+
+function isCurrentPath(pathname: string, href: string) {
+  if (href === "/") {
+    return pathname === "/";
+  }
+
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", isOpen);
@@ -98,7 +109,11 @@ export function MobileMenu() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="block rounded-md px-3 py-3 font-semibold text-charcoal transition hover:bg-muted-bg hover:text-teal"
+                      className={cn(
+                        "block rounded-md px-3 py-3 font-semibold text-charcoal transition hover:bg-muted-bg hover:text-teal",
+                        isCurrentPath(pathname, item.href) && "bg-teal-light"
+                      )}
+                      aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
                       onClick={() => setIsOpen(false)}
                     >
                       {item.label}

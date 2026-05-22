@@ -64,6 +64,8 @@ Homepage order:
 2. Header / nav
    - Use the provided Aya Dental Studio logo asset from the project/public assets. Do not recreate the logo in text or with an icon unless the image fails to load.
    - Primary navigation.
+   - Navigation items: Home, About, Services, Gallery, FAQ, Contact.
+   - No separate 360 navigation route.
    - Call button.
    - WhatsApp button.
    - Book Appointment button.
@@ -87,47 +89,62 @@ Homepage order:
    - Personalized treatment planning.
 
 5. Services preview
-   - Cards for all 8 services.
+   - Service groups: Preventive Care, Restorative Care, Cosmetic Care, Advanced Care.
+   - Links to individual service detail pages.
    - Plain-language descriptions.
-   - Consistent icon style.
-   - Links to service detail pages.
    - Equal visual rhythm and card height.
 
-6. About dentist / team preview
+6. Why patients choose Aya
+   - Clean, carefully prepared environment.
+   - Clear treatment explanations.
+   - Thoughtful appointment experience.
+   - Patient-first treatment planning.
+
+7. Inside the Studio
+   - One embedded interactive 360 viewer directly on the homepage.
+   - Eyebrow: "Inside the Studio".
+   - Heading: "Take a 360° look inside Aya Dental Studio".
+   - Use `/images/virtual-tour/aya-reception-360.jpg` until the real image is provided.
+   - Lazy-load only when the section is near the viewport.
+   - No modal, popup, route change, or separate tour page.
+
+8. Care for every stage of life
+   - Children & families.
+   - Teens & orthodontic care.
+   - Adults & restorative care.
+   - Cosmetic smile care.
+
+9. About dentist / team preview
    - Photo placeholder.
    - Credentials placeholder.
-   - Experience placeholder.
-   - Specialization placeholder.
+   - Name placeholder.
+   - Role placeholder.
+   - Areas of care TODO.
+   - Languages spoken TODO.
    - TODO comments for real clinic input.
 
-7. Virtual tour preview
-   - Static preview only.
-   - CTA: "Start 360° Clinic Tour".
-   - No auto-loading heavy viewer bundle.
-   - TODO for one optimized equirectangular reception/waiting-area image.
-
-8. Patient journey
+10. Patient journey
    - Book.
    - Consultation.
    - Treatment plan.
    - Treatment.
    - Aftercare.
 
-9. Testimonials / Google Reviews placeholder
+11. Testimonials / Google Reviews placeholder
    - No fake review content.
    - TODO for verified Google Reviews integration.
 
-10. FAQ preview
+12. FAQ preview
    - 4 to 6 common questions.
    - Link to full FAQ.
 
-11. Final CTA block
+13. Final CTA block
    - Book appointment.
    - Call.
    - WhatsApp.
    - Map / location link.
 
-12. Footer
+14. Footer
    - Brand summary.
    - Navigation links.
    - Service links.
@@ -148,7 +165,7 @@ Must include:
 - Trust strip.
 - Services preview.
 - Team preview.
-- Virtual tour preview.
+- Embedded 360 studio preview.
 - Patient journey.
 - FAQ preview.
 - Final CTA.
@@ -222,19 +239,23 @@ Must include:
 - No fake before/after claims.
 - No patient-identifiable media without written consent.
 
-### Virtual Tour `/virtual-tour`
+### Embedded 360 Studio Preview
 
-Goal: let users preview the clinic environment without harming homepage performance.
+Goal: let users preview the clinic environment directly on the homepage without harming initial page performance.
 
 Must include:
 
-- One lazy-loaded equirectangular 360 viewer.
-- Static fallback image.
+- No separate `/virtual-tour` route.
+- One lazy-loaded equirectangular 360 viewer embedded on the homepage.
+- Static poster/loading state.
 - Loading state.
 - Graceful error state.
 - Accessible explanatory text.
 - Mobile-friendly touch controls.
 - Consent and image optimization comments.
+- Placeholder path: `/images/virtual-tour/aya-reception-360.jpg`.
+- The viewer must not load above the fold.
+- No popup, modal, overlay tour, or route change.
 
 ### FAQ `/faq`
 
@@ -437,7 +458,8 @@ Must include:
 - Stable image dimensions.
 - Lazy loading below the fold.
 - Dynamic import for the 360 viewer with SSR disabled.
-- No 360 viewer bundle on the homepage.
+- The embedded homepage 360 viewer must lazy-load only when the section nears the viewport.
+- No 360 viewer bundle in the initial hero load.
 - No synchronous third-party analytics scripts.
 
 ## 9. Content Placeholder Rules
@@ -485,6 +507,7 @@ Do not fabricate:
 - Hidden contact options.
 - Form asking for excessive medical information.
 - Auto-loading heavy 360 viewer on homepage.
+- Separate 360 route or modal/popup tour.
 - Glassmorphism.
 - Excessive animation.
 - Arbitrary colors outside tokens.
