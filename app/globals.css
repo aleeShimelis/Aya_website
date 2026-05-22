@@ -133,24 +133,30 @@ button {
 
 .hero-section {
   min-height: auto;
-  background: var(--color-muted-bg);
+  background: color-mix(in srgb, var(--color-teal-light) 18%, var(--color-background));
 }
 
 .hero-grid {
   min-height: auto;
-  padding-block: 3.5rem;
+  padding-block: 3.25rem;
 }
 
 .hero-copy {
-  max-width: 66ch;
+  max-width: 65ch;
 }
 
 .hero-title {
-  max-width: 11ch;
+  max-width: 14ch;
 }
 
 .hero-media {
-  min-height: 30rem;
+  position: relative;
+  isolation: isolate;
+  min-height: 24rem;
+}
+
+.hero-media-frame {
+  min-height: inherit;
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
@@ -158,36 +164,93 @@ button {
   box-shadow: var(--shadow-md);
 }
 
-.hero-media-visual {
+.hero-media-room {
+  position: relative;
   min-height: inherit;
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--color-card-bg) 20%, transparent),
-      color-mix(in srgb, var(--color-charcoal) 8%, transparent)
-    ),
-    linear-gradient(135deg, var(--color-teal-light), var(--color-card-bg));
+      color-mix(in srgb, var(--color-card-bg) 88%, var(--color-teal-light)) 0 46%,
+      color-mix(in srgb, var(--color-muted-bg) 84%, var(--color-card-bg)) 46% 100%
+    );
 }
 
-.hero-media-room {
-  min-height: inherit;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0 11%,
-      color-mix(in srgb, var(--color-card-bg) 72%, transparent) 11% 12%,
-      transparent 12% 100%
-    ),
-    linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--color-card-bg) 85%, transparent) 0 16%,
-      transparent 16% 100%
-    ),
-    linear-gradient(
-      135deg,
-      color-mix(in srgb, var(--color-teal-light) 88%, transparent),
-      color-mix(in srgb, var(--color-card-bg) 72%, transparent)
-    );
+.hero-room-window,
+.hero-room-desk,
+.hero-room-accent {
+  position: absolute;
+  display: block;
+  border: 1px solid var(--color-border);
+}
+
+.hero-room-window {
+  top: 12%;
+  right: 7%;
+  width: 43%;
+  height: 48%;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-teal-light) 55%, var(--color-card-bg));
+  box-shadow: inset 0 0 0 10px color-mix(in srgb, var(--color-card-bg) 42%, transparent);
+}
+
+.hero-room-window::before,
+.hero-room-window::after,
+.hero-room-desk::before {
+  position: absolute;
+  content: "";
+}
+
+.hero-room-window::before {
+  inset-block: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.hero-room-window::after {
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.hero-room-desk {
+  right: 7%;
+  bottom: 11%;
+  left: 7%;
+  height: 24%;
+  border-radius: var(--radius-md);
+  background: var(--color-card-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-room-desk::before {
+  right: 8%;
+  bottom: 18%;
+  left: 8%;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.hero-room-accent {
+  top: 17%;
+  left: 9%;
+  width: 27%;
+  height: 36%;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-card-bg) 78%, var(--color-teal-light));
+}
+
+.hero-media-note {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  max-width: 18rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--color-card-bg) 94%, var(--color-background));
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
 }
 
 .placeholder-surface {
@@ -235,7 +298,11 @@ button {
   }
 
   .hero-grid {
-    padding-block: 4.5rem;
+    padding-block: 4.25rem;
+  }
+
+  .hero-media {
+    min-height: 30rem;
   }
 
   .tour-viewer-viewport {
@@ -258,7 +325,11 @@ button {
   }
 
   .hero-grid {
-    padding-block: 5.5rem;
+    padding-block: 5rem;
+  }
+
+  .hero-media {
+    min-height: 32rem;
   }
 
   .tour-viewer-viewport {
@@ -268,21 +339,21 @@ button {
 
 @media (min-width: 1280px) {
   .hero-section {
-    min-height: 42.5rem;
+    min-height: 44rem;
   }
 
   .hero-grid {
-    min-height: 42.5rem;
+    min-height: 44rem;
   }
 
   .hero-media {
-    min-height: 36rem;
+    min-height: 36.5rem;
   }
 
   .hero-title {
     font-size: 3.875rem;
-    line-height: 1.03;
-    max-width: 11.5ch;
+    line-height: 1.02;
+    max-width: 14.5ch;
   }
 }
 
@@ -294,15 +365,15 @@ button {
 
   .hero-section,
   .hero-grid {
-    min-height: 47.5rem;
+    min-height: 45.5rem;
   }
 
   .hero-media {
-    min-height: 41rem;
+    min-height: 39rem;
   }
 
   .hero-title {
-    font-size: 4.25rem;
+    font-size: 4.125rem;
   }
 
   .tour-viewer-viewport {
