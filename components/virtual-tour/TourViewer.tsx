@@ -52,17 +52,21 @@ export default function TourViewer({ imageSrc }: TourViewerProps) {
 
   if (hasError) {
     return (
-      <div className="rounded-card border border-border bg-card-bg p-6 text-muted-text">
-        The 360° image could not be loaded. TODO: add the optimized equirectangular clinic image
-        before production.
+      <div className="tour-viewer-viewport tour-viewer-poster flex items-end overflow-hidden p-5 md:p-8">
+        <div className="tour-viewer-message">
+          <p className="font-semibold text-card-bg">360 degree image unavailable</p>
+          <p className="mt-2 text-sm leading-6 text-teal-light">
+            Add the optimized equirectangular clinic image before production.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="rounded-card border border-border bg-card-bg p-4 shadow-soft">
+    <div className="tour-viewer-frame">
       <div
-        className="tour-viewer-viewport relative cursor-grab overflow-hidden rounded-card bg-muted-bg active:cursor-grabbing"
+        className="tour-viewer-viewport relative cursor-grab overflow-hidden bg-muted-bg active:cursor-grabbing"
         role="application"
         aria-label="Interactive 360 degree clinic preview. Drag left or right, or use arrow keys, to pan."
         tabIndex={0}
@@ -83,16 +87,15 @@ export default function TourViewer({ imageSrc }: TourViewerProps) {
           draggable={false}
           unoptimized
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-charcoal p-4 text-sm text-card-bg">
+        <div className="tour-viewer-hint pointer-events-none absolute bottom-5 left-5 max-w-md rounded-card border border-border bg-charcoal p-4 text-sm text-card-bg md:bottom-8 md:left-8">
           Drag to pan, or focus this viewer and use the left and right arrow keys.
         </div>
-      </div>
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-muted-text">
-          Viewer loads only when this section is near the viewport. Final 360 image should be
-          optimized to about 8 MB maximum or less if quality allows.
-        </p>
-        <Button type="button" variant="secondary" onClick={() => setOffset(0)}>
+        <Button
+          type="button"
+          variant="secondary"
+          className="absolute bottom-5 right-5 border-border bg-card-bg md:bottom-8 md:right-8"
+          onClick={() => setOffset(0)}
+        >
           <RotateCcw className="h-4 w-4" aria-hidden="true" />
           Reset view
         </Button>

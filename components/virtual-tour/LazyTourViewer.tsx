@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ComponentType } from "react";
-import { Card } from "@/components/ui/Card";
 
 type TourViewerComponent = ComponentType<{ imageSrc: string }>;
 
@@ -48,7 +47,7 @@ export function LazyTourViewer({ imageSrc }: LazyTourViewerProps) {
   }, [failed, shouldLoad, TourViewer]);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="tour-viewer-shell">
       {TourViewer ? <TourViewer imageSrc={imageSrc} /> : <TourPoster failed={failed} />}
     </div>
   );
@@ -56,19 +55,17 @@ export function LazyTourViewer({ imageSrc }: LazyTourViewerProps) {
 
 function TourPoster({ failed }: { failed: boolean }) {
   return (
-    <Card className="tour-viewer-viewport flex flex-col justify-end overflow-hidden p-0">
-      <div className="placeholder-surface flex flex-1 items-end p-5 md:p-8">
-        <div className="max-w-lg rounded-card border border-border bg-card-bg p-5 shadow-soft">
-          <p className="font-semibold text-charcoal">
-            {failed ? "360 viewer unavailable" : "Preparing the 360° clinic preview"}
-          </p>
-          <p className="mt-2 text-sm leading-6 text-muted-text">
-            {failed
-              ? "The interactive viewer could not load. The final reception image should still be available as an optimized fallback."
-              : "The interactive viewer loads when this section is near the viewport, keeping the top of the homepage light."}
-          </p>
-        </div>
+    <div className="tour-viewer-viewport tour-viewer-poster flex items-end overflow-hidden p-5 md:p-8">
+      <div className="tour-viewer-message">
+        <p className="font-semibold text-card-bg">
+          {failed ? "360 viewer unavailable" : "Preparing the 360 degree clinic preview"}
+        </p>
+        <p className="mt-2 text-sm leading-6 text-teal-light">
+          {failed
+            ? "The interactive viewer could not load. The final reception image should still be available as an optimized fallback."
+            : "The interactive viewer loads when this section is near the viewport, keeping the top of the homepage light."}
+        </p>
       </div>
-    </Card>
+    </div>
   );
 }

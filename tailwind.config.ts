@@ -38,8 +38,24 @@ const config: Config = {
         focus: "var(--shadow-focus)"
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
-        serif: ["Cormorant Garamond", "Georgia", "serif"]
+        sans: [
+          "Candara",
+          "Aptos",
+          "Avenir Next",
+          "Segoe UI Variable",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ],
+        serif: [
+          "Optima",
+          "Aptos Display",
+          "Candara",
+          "Avenir Next",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif"
+        ]
       },
       maxWidth: {
         site: "none",

@@ -58,10 +58,10 @@ Contrast requirements:
 
 Use a maximum of two font families:
 
-- Primary UI and body font: `Inter`, loaded with `next/font`, `font-display: swap`.
-- Editorial heading accent font: `Cormorant Garamond`, loaded with `next/font`, `font-display: swap`.
+- Primary UI and body font: `Candara`, with `Aptos`, `Avenir Next`, and `Segoe UI Variable` fallbacks.
+- Editorial heading accent font: `Optima`, with `Aptos Display`, `Candara`, and `Avenir Next` fallbacks.
 
-If performance or language support becomes a concern, use `Inter` only.
+Use local/system fonts only until approved brand font files are available; do not add a network font dependency.
 
 Base rules:
 
