@@ -42,9 +42,9 @@ const config: Config = {
         serif: ["Cormorant Garamond", "Georgia", "serif"]
       },
       maxWidth: {
-        site: "1520px",
+        site: "none",
         narrow: "760px",
-        wide: "1600px"
+        wide: "none"
       },
       spacing: {
         "section-sm": "3.5rem",

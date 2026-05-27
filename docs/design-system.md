@@ -125,10 +125,11 @@ Section padding:
 
 Layout:
 
-- Site container max width: 1520px.
+- Site container: fluid full-width layout with clamped responsive side padding.
 - Narrow content max width: 760px.
-- Wide content max width: 1600px for expansive media-led layouts.
-- Container side padding: 20px mobile, 32px tablet, 48px desktop, 64px large desktop.
+- Wide content: fluid full-width layout for expansive media-led sections.
+- Site container side padding: 20px minimum, scaling with viewport width up to 88px.
+- Narrow container side padding: 20px mobile, 32px tablet, 48px desktop, 64px large desktop.
 - Text paragraphs must stay readable and should not exceed 60-68ch.
 - Large desktop layouts must use available space intentionally through grids, media, and full-width section backgrounds, while preserving readable text widths.
 - Full-width section backgrounds should extend edge-to-edge, with content held inside the site or wide container.

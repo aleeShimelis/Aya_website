@@ -295,13 +295,13 @@ If you need new card variants, add them here instead of styling one-off cards wi
 Edit `app/globals.css`.
 
 Main controls:
-- `.container-site` controls the main wide container.
+- `.container-site` controls the main fluid full-width container.
 - `.container-narrow` controls readable narrow content.
 - `.section-padding` controls standard vertical spacing.
 - `.section-padding-compact` controls smaller vertical spacing.
 - `.prose-width` keeps paragraphs readable.
 
-The current desktop layout uses a wide `1520px` container. If you change it, also update the documentation in `docs/design-system.md`.
+The current desktop layout uses a fluid full-width container with clamped side padding. If you change it, also update the documentation in `docs/design-system.md`.
 
 ### Change Hero Layout
 
