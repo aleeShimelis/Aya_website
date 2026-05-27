@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
 import { ButtonLink } from "@/components/ui/Button";
 import { contactActions } from "@/lib/constants";
@@ -6,24 +7,16 @@ export function Hero() {
   return (
     <section className="hero-section border-b border-border">
       <div className="hero-media">
-        {/* TODO: Replace this composed placeholder with an approved real clinic/reception photo. */}
-        <div
-          className="hero-media-frame"
-          role="img"
-          aria-label="Approved Aya Dental Studio reception or clinic environment photo placeholder"
-        >
-          <div className="hero-media-room" aria-hidden="true">
-            <span className="hero-room-window" />
-            <span className="hero-room-desk" />
-            <span className="hero-room-accent" />
-          </div>
+        <div className="hero-media-frame">
+          <Image
+            src="/images/hero/aya-reception.jpg"
+            alt="Aya Dental Studio reception area"
+            fill
+            priority
+            sizes="100vw"
+            className="hero-image"
+          />
         </div>
-        <aside className="hero-media-note" aria-label="Hero media launch note">
-          <p className="text-sm font-semibold text-charcoal">Inside Aya Dental Studio</p>
-          <p className="mt-1 text-xs leading-5 text-muted-text">
-            Reception and clinic preview prepared for launch
-          </p>
-        </aside>
       </div>
       <div className="container-site hero-grid flex items-center">
         <div className="hero-copy">
