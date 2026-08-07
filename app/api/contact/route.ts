@@ -1,7 +1,9 @@
+import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
-import { getRequestKey, checkRateLimit } from "@/lib/rate-limit";
-import { sendFormNotification, verifyTurnstileToken } from "@/lib/security";
+import { deliverFormNotification } from "@/lib/form-delivery";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { verifyTurnstileToken } from "@/lib/security";
 import { contactSchema } from "@/lib/validation";
 
 function fieldErrors(error: ZodError) {
@@ -11,35 +13,85 @@ function fieldErrors(error: ZodError) {
 }
 
 export async function POST(request: Request) {
-  const limit = checkRateLimit(getRequestKey(request, "contact"));
+  const limit = await checkRateLimit(request, "contact");
+
+  if (limit.status === "unavailable") {
+    return NextResponse.json(
+      {
+        ok: false,
+        message: "Online requests are temporarily unavailable. Please call or use WhatsApp."
+      },
+      { status: 503, headers: { "Cache-Control": "no-store" } }
+    );
+  }
 
   if (!limit.allowed) {
+    const retryAfter = Math.max(1, Math.ceil((limit.resetAt - Date.now()) / 1000));
     return NextResponse.json(
       { ok: false, message: "Too many requests. Please wait a moment and try again." },
-      { status: 429 }
+      {
+        status: 429,
+        headers: {
+          "Cache-Control": "no-store",
+          "Retry-After": String(retryAfter),
+          "X-RateLimit-Remaining": String(limit.remaining)
+        }
+      }
     );
   }
 
   try {
     const body = await request.json();
     const parsed = contactSchema.parse(body);
-    const verification = await verifyTurnstileToken(parsed.turnstileToken);
+    const verification = await verifyTurnstileToken({
+      token: parsed.turnstileToken,
+      expectedAction: "contact",
+      remoteIp: getClientIp(request)
+    });
 
     if (!verification.success) {
-      return NextResponse.json({ ok: false, message: verification.message }, { status: 400 });
+      return NextResponse.json(
+        { ok: false, message: verification.message },
+        {
+          status: verification.status === "unavailable" ? 503 : 400,
+          headers: { "Cache-Control": "no-store" }
+        }
+      );
     }
 
-    await sendFormNotification("Aya Dental Studio contact message", {
-      name: parsed.fullName,
-      phone: parsed.phone,
-      preferredContact: parsed.preferredContact,
-      message: parsed.message
+    const submissionId = randomUUID();
+    const delivery = await deliverFormNotification({
+      subject: "Aya Dental Studio contact message",
+      idempotencyKey: `contact/${submissionId}`,
+      fields: [
+        { label: "Reference", value: submissionId },
+        { label: "Name", value: parsed.fullName },
+        { label: "Phone", value: parsed.phone },
+        { label: "Preferred contact", value: parsed.preferredContact },
+        { label: "Message", value: parsed.message }
+      ]
     });
 
-    return NextResponse.json({
-      ok: true,
-      message: "Your message has been received. Clinic staff should follow up soon."
-    });
+    if (!delivery.accepted) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: "We could not deliver your message. Please call or use WhatsApp instead."
+        },
+        {
+          status: delivery.status === "rejected" ? 502 : 503,
+          headers: { "Cache-Control": "no-store" }
+        }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        ok: true,
+        message: "Your message has been received. Clinic staff should follow up soon."
+      },
+      { headers: { "Cache-Control": "no-store" } }
+    );
   } catch (error) {
     if (error instanceof ZodError) {
       return NextResponse.json(
@@ -48,13 +100,13 @@ export async function POST(request: Request) {
           message: "Please review the highlighted fields.",
           errors: fieldErrors(error)
         },
-        { status: 400 }
+        { status: 400, headers: { "Cache-Control": "no-store" } }
       );
     }
 
     return NextResponse.json(
       { ok: false, message: "We could not submit the form. Please try again." },
-      { status: 500 }
+      { status: 500, headers: { "Cache-Control": "no-store" } }
     );
   }
 }

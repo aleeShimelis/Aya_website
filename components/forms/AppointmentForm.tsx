@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { Printer } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { SelectInput, TextArea, TextInput } from "@/components/forms/FormField";
+import {
+  TurnstileWidget,
+  type TurnstileWidgetHandle
+} from "@/components/forms/TurnstileWidget";
 import { services } from "@/content/services";
 import { siteConfig } from "@/lib/constants";
 import { formatDateForDisplay } from "@/lib/utils";
@@ -25,10 +29,12 @@ const serviceOptions = [
 ];
 
 export function AppointmentForm() {
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
   const [confirmation, setConfirmation] = useState<Confirmation | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,7 +42,8 @@ export function AppointmentForm() {
     setErrors({});
     setMessage("");
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const selectedService = services.find((service) => service.slug === formData.get("service"));
     const payload = {
       fullName: String(formData.get("fullName") || ""),
@@ -46,38 +53,46 @@ export function AppointmentForm() {
       preferredDate: String(formData.get("preferredDate") || ""),
       message: String(formData.get("message") || ""),
       privacyConsent: formData.get("privacyConsent") === "on",
-      turnstileToken: String(formData.get("turnstileToken") || "development-placeholder")
+      turnstileToken
     };
 
-    const response = await fetch("/api/appointment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+    try {
+      const response = await fetch("/api/appointment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-    const result = (await response.json()) as {
-      ok: boolean;
-      message?: string;
-      errors?: FieldErrors;
-    };
+      const result = (await response.json()) as {
+        ok: boolean;
+        message?: string;
+        errors?: FieldErrors;
+      };
 
-    if (!response.ok || !result.ok) {
+      if (!response.ok || !result.ok) {
+        setStatus("error");
+        setErrors(result.errors || {});
+        setMessage(result.message || "Please review the form and try again.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage(result.message || "Your appointment request has been received.");
+      setConfirmation({
+        fullName: payload.fullName,
+        phone: payload.phone,
+        preferredContact: payload.preferredContact,
+        service: selectedService?.title || payload.service,
+        preferredDate: payload.preferredDate
+      });
+      form.reset();
+    } catch {
       setStatus("error");
-      setErrors(result.errors || {});
-      setMessage(result.message || "Please review the form and try again.");
-      return;
+      setMessage("We could not send your request. Please call or use WhatsApp instead.");
+    } finally {
+      setTurnstileToken("");
+      turnstileRef.current?.reset();
     }
-
-    setStatus("success");
-    setMessage(result.message || "Your appointment request has been received.");
-    setConfirmation({
-      fullName: payload.fullName,
-      phone: payload.phone,
-      preferredContact: payload.preferredContact,
-      service: selectedService?.title || payload.service,
-      preferredDate: payload.preferredDate
-    });
-    event.currentTarget.reset();
   }
 
   if (status === "success" && confirmation) {
@@ -180,11 +195,11 @@ export function AppointmentForm() {
           hint="Please keep this brief. Do not include detailed medical history in this form."
           error={errors.message}
         />
-        <input type="hidden" name="turnstileToken" value="development-placeholder" />
-        <div className="rounded-card bg-muted-bg p-4 text-sm text-muted-text">
-          Cloudflare Turnstile placeholder active. Production must add the public widget and server
-          secret before launch.
-        </div>
+        <TurnstileWidget
+          ref={turnstileRef}
+          action="appointment"
+          onTokenChange={setTurnstileToken}
+        />
         <label className="flex items-start gap-3 text-sm text-muted-text">
           <input
             name="privacyConsent"
@@ -203,7 +218,7 @@ export function AppointmentForm() {
         {message ? (
           <p className="rounded-card bg-muted-bg p-4 text-sm font-semibold text-error">{message}</p>
         ) : null}
-        <Button type="submit" disabled={status === "submitting"}>
+        <Button type="submit" disabled={status === "submitting" || !turnstileToken}>
           {status === "submitting" ? "Sending..." : "Request Appointment"}
         </Button>
       </div>

@@ -3,6 +3,13 @@ import { NextResponse, type NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const response = NextResponse.next();
   const isProduction = process.env.NODE_ENV === "production";
+  const scriptSrc = [
+    "script-src 'self' 'unsafe-inline'",
+    isProduction ? "" : "'unsafe-eval'",
+    "https://challenges.cloudflare.com"
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   const csp = [
     "default-src 'self'",
@@ -12,8 +19,8 @@ export function middleware(request: NextRequest) {
     "img-src 'self' data: blob:",
     "font-src 'self' data:",
     "style-src 'self' 'unsafe-inline'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com",
-    "connect-src 'self' https://challenges.cloudflare.com https://api.resend.com",
+    scriptSrc,
+    "connect-src 'self' https://challenges.cloudflare.com",
     "frame-src 'self' https://www.google.com https://www.google.com/maps https://challenges.cloudflare.com",
     "form-action 'self'",
     "upgrade-insecure-requests"

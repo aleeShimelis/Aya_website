@@ -46,7 +46,7 @@ export const appointmentSchema = z.object({
   privacyConsent: z.literal(true, {
     errorMap: () => ({ message: "Please confirm that you agree to the privacy notice." })
   }),
-  turnstileToken: z.string().trim().min(1, "Bot protection is required.").max(4096)
+  turnstileToken: z.string().trim().min(1, "Bot protection is required.").max(2048)
 });
 
 export const contactSchema = z.object({
@@ -64,7 +64,7 @@ export const contactSchema = z.object({
   privacyConsent: z.literal(true, {
     errorMap: () => ({ message: "Please confirm that you agree to the privacy notice." })
   }),
-  turnstileToken: z.string().trim().min(1, "Bot protection is required.").max(4096)
+  turnstileToken: z.string().trim().min(1, "Bot protection is required.").max(2048)
 });
 
 export type AppointmentInput = z.infer<typeof appointmentSchema>;

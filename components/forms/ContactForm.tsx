@@ -1,16 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { SelectInput, TextArea, TextInput } from "@/components/forms/FormField";
+import {
+  TurnstileWidget,
+  type TurnstileWidgetHandle
+} from "@/components/forms/TurnstileWidget";
 
 type FieldErrors = Partial<Record<string, string>>;
 
 export function ContactForm() {
+  const turnstileRef = useRef<TurnstileWidgetHandle>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -18,38 +24,47 @@ export function ContactForm() {
     setErrors({});
     setMessage("");
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const payload = {
       fullName: String(formData.get("fullName") || ""),
       phone: String(formData.get("phone") || ""),
       preferredContact: String(formData.get("preferredContact") || ""),
       message: String(formData.get("message") || ""),
       privacyConsent: formData.get("privacyConsent") === "on",
-      turnstileToken: String(formData.get("turnstileToken") || "development-placeholder")
+      turnstileToken
     };
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
 
-    const result = (await response.json()) as {
-      ok: boolean;
-      message?: string;
-      errors?: FieldErrors;
-    };
+      const result = (await response.json()) as {
+        ok: boolean;
+        message?: string;
+        errors?: FieldErrors;
+      };
 
-    if (!response.ok || !result.ok) {
+      if (!response.ok || !result.ok) {
+        setStatus("error");
+        setErrors(result.errors || {});
+        setMessage(result.message || "Please review the form and try again.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage(result.message || "Your message has been received.");
+      form.reset();
+    } catch {
       setStatus("error");
-      setErrors(result.errors || {});
-      setMessage(result.message || "Please review the form and try again.");
-      return;
+      setMessage("We could not send your message. Please call or use WhatsApp instead.");
+    } finally {
+      setTurnstileToken("");
+      turnstileRef.current?.reset();
     }
-
-    setStatus("success");
-    setMessage(result.message || "Your message has been received.");
-    event.currentTarget.reset();
   }
 
   return (
@@ -84,11 +99,11 @@ export function ContactForm() {
           hint="Please do not include detailed medical history in this form."
           error={errors.message}
         />
-        <input type="hidden" name="turnstileToken" value="development-placeholder" />
-        <div className="rounded-card bg-muted-bg p-4 text-sm text-muted-text">
-          Cloudflare Turnstile placeholder active. Production must add the public widget and server
-          secret before launch.
-        </div>
+        <TurnstileWidget
+          ref={turnstileRef}
+          action="contact"
+          onTokenChange={setTurnstileToken}
+        />
         <label className="flex items-start gap-3 text-sm text-muted-text">
           <input
             name="privacyConsent"
@@ -112,7 +127,7 @@ export function ContactForm() {
             {message}
           </p>
         ) : null}
-        <Button type="submit" disabled={status === "submitting"}>
+        <Button type="submit" disabled={status === "submitting" || !turnstileToken}>
           {status === "submitting" ? "Sending..." : "Send Message"}
         </Button>
       </div>
