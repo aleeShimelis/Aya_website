@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import "@fontsource-variable/manrope";
+import "@fontsource-variable/space-grotesk";
+import "@photo-sphere-viewer/core/index.css";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";

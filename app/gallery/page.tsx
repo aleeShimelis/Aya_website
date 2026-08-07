@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/sections/PageHero";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import Image from "next/image";
 import { Card } from "@/components/ui/Card";
 import { createMetadata } from "@/lib/seo";
 
@@ -12,12 +12,36 @@ export const metadata: Metadata = createMetadata({
 });
 
 const galleryItems = [
-  "Reception area",
-  "Waiting area",
-  "Treatment room",
-  "Equipment detail",
-  "Team portrait",
-  "Exterior or landmark"
+  {
+    title: "Reception area",
+    src: "/images/gallery/reception-area.jpg",
+    alt: "Reception area at Aya Dental Studio"
+  },
+  {
+    title: "Waiting area",
+    src: "/images/gallery/waiting-area.jpg",
+    alt: "Patient waiting area at Aya Dental Studio"
+  },
+  {
+    title: "Treatment room",
+    src: "/images/gallery/treatment-room.jpg",
+    alt: "Dental treatment room at Aya Dental Studio"
+  },
+  {
+    title: "Equipment detail",
+    src: "/images/gallery/equipment-detail.jpg",
+    alt: "Dental equipment used at Aya Dental Studio"
+  },
+  {
+    title: "Team portrait",
+    src: "/images/gallery/team-portrait.jpg",
+    alt: "Aya Dental Studio clinical team"
+  },
+  {
+    title: "Exterior or landmark",
+    src: "/images/gallery/exterior-landmark.jpg",
+    alt: "Exterior and location of Aya Dental Studio"
+  }
 ] as const;
 
 export default function GalleryPage() {
@@ -31,12 +55,25 @@ export default function GalleryPage() {
       <section className="section-padding bg-background">
         <div className="container-site grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {galleryItems.map((item) => (
-            <MediaPlaceholder
-              key={item}
-              label={`${item} placeholder`}
-              note="TODO: replace with real clinic image."
-              className="min-h-80"
-            />
+           <figure
+            key={item.src}
+            className="overflow-hidden rounded-card border border-border bg-card-bg"
+          >
+            <div className="relative aspect-[4/3]">
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                quality={90}
+                className="object-cover"
+              />
+            </div>
+
+            <figcaption className="px-5 py-4 font-semibold text-charcoal">
+              {item.title}
+            </figcaption>
+          </figure> 
           ))}
         </div>
         <div className="container-narrow mt-10">

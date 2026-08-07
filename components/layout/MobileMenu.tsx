@@ -69,7 +69,7 @@ export function MobileMenu() {
       <button
         ref={triggerRef}
         type="button"
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-pill border border-border bg-card-bg text-charcoal"
+        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-border bg-card-bg text-charcoal shadow-soft transition hover:border-teal hover:bg-muted-bg hover:text-teal"
         aria-label="Open navigation menu"
         aria-expanded={isOpen}
         aria-controls="mobile-menu"
@@ -79,20 +79,20 @@ export function MobileMenu() {
       </button>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-50 bg-charcoal" role="presentation">
+        <div className="fixed inset-0 z-50 bg-charcoal/80 backdrop-blur-sm" role="presentation">
           <div
             ref={panelRef}
             id="mobile-menu"
-            className="ml-auto flex h-full w-full max-w-sm flex-col bg-card-bg p-6 shadow-elevated"
+            className="ml-auto flex h-full w-full max-w-sm flex-col bg-background p-5 shadow-elevated"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"
           >
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
               <span className="font-serif text-2xl font-semibold text-charcoal">Menu</span>
               <button
                 type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-pill border border-border bg-card-bg text-charcoal"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-border bg-card-bg text-charcoal shadow-soft transition hover:border-teal hover:bg-muted-bg hover:text-teal"
                 aria-label="Close navigation menu"
                 onClick={() => {
                   setIsOpen(false);
@@ -103,15 +103,16 @@ export function MobileMenu() {
               </button>
             </div>
 
-            <nav className="mt-8" aria-label="Mobile primary navigation">
-              <ul className="space-y-2">
+            <nav className="mt-6" aria-label="Mobile primary navigation">
+              <ul className="space-y-1">
                 {primaryNavigation.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
                       className={cn(
-                        "block rounded-md px-3 py-3 font-semibold text-charcoal transition hover:bg-muted-bg hover:text-teal",
-                        isCurrentPath(pathname, item.href) && "bg-teal-light"
+                        "flex min-h-12 items-center rounded-md border border-transparent px-4 py-3 font-semibold text-charcoal transition hover:border-border hover:bg-card-bg hover:text-teal",
+                        isCurrentPath(pathname, item.href) &&
+                          "border-border bg-card-bg text-teal shadow-soft"
                       )}
                       aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
                       onClick={() => setIsOpen(false)}
@@ -124,13 +125,17 @@ export function MobileMenu() {
             </nav>
 
             <div className="mt-auto space-y-3 pt-8">
-              <ButtonLink href="/contact" className="w-full" onClick={() => setIsOpen(false)}>
+              <ButtonLink
+                href="/contact"
+                className="w-full !rounded-md"
+                onClick={() => setIsOpen(false)}
+              >
                 Book Appointment
               </ButtonLink>
               <ButtonLink
                 href={contactActions.callPrimary}
                 variant="secondary"
-                className="w-full"
+                className="w-full !rounded-md"
                 onClick={() => setIsOpen(false)}
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
@@ -139,7 +144,7 @@ export function MobileMenu() {
               <ButtonLink
                 href={contactActions.whatsapp}
                 variant="teal"
-                className="w-full"
+                className="w-full !rounded-md"
                 onClick={() => setIsOpen(false)}
               >
                 WhatsApp

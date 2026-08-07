@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ImageIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { getServicesForGroup, serviceGroups } from "@/content/service-groups";
@@ -16,12 +17,15 @@ export function ServicesPreview() {
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 2xl:gap-7">
           {serviceGroups.map((group) => (
             <Card key={group.title} className="service-card flex h-full flex-col gap-5 p-5 lg:p-6">
-              <div
-                className="service-card-media flex items-center justify-center text-teal"
-                role="img"
-                aria-label={`${group.title} image placeholder`}
-              >
-                <ImageIcon className="h-8 w-8" aria-hidden="true" />
+              <div className="service-card-media relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={group.imageSrc}
+                  alt={group.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  quality={90}
+                  className="object-cover"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-semibold text-charcoal">{group.title}</h3>

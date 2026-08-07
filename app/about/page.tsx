@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import Image from "next/image";
 import { Card } from "@/components/ui/Card";
 import { PageHero } from "@/components/sections/PageHero";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -24,11 +24,16 @@ export default function AboutPage() {
       />
       <section className="section-padding bg-background">
         <div className="container-site grid gap-10 lg:grid-cols-[0.9fr_1fr]">
-          <MediaPlaceholder
-            label="Clinic interior photo placeholder"
-            note="TODO: replace with approved real clinic photography."
-            className="min-h-96"
-          />
+          <div className="relative min-h-96 overflow-hidden rounded-card border border-border">
+            <Image
+              src="/images/about/clinic-interior.jpg"
+              alt="Interior of Aya Dental Studio"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              quality={90}
+              className="object-cover"
+            />
+          </div>
           <div className="space-y-5">
             <Card>
               <h2 className="text-2xl font-semibold text-charcoal">Clinic values</h2>

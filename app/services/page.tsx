@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ImageIcon } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -30,12 +31,15 @@ export default function ServicesPage() {
         <div className="container-site grid gap-5 sm:grid-cols-2 lg:grid-cols-4 xl:gap-6">
           {serviceGroups.map((group) => (
             <Card key={group.title} className="service-card flex h-full flex-col gap-5 p-5 lg:p-6">
-              <div
-                className="service-card-media flex items-center justify-center text-teal"
-                role="img"
-                aria-label={`${group.title} image placeholder`}
-              >
-                <ImageIcon className="h-8 w-8" aria-hidden="true" />
+              <div className="service-card-media relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src={group.imageSrc}
+                  alt={group.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  quality={90}
+                  className="object-cover"
+                />
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-charcoal">{group.title}</h2>

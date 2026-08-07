@@ -39,19 +39,16 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "Candara",
+          "Manrope Variable",
           "Aptos",
-          "Avenir Next",
           "Segoe UI Variable",
           "ui-sans-serif",
           "system-ui",
           "sans-serif"
         ],
         serif: [
-          "Optima",
-          "Aptos Display",
-          "Candara",
-          "Avenir Next",
+          "Space Grotesk Variable",
+          "Manrope Variable",
           "ui-sans-serif",
           "system-ui",
           "sans-serif"

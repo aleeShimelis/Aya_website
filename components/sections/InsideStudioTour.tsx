@@ -6,8 +6,8 @@ export function InsideStudioTour() {
   return (
     <section className="studio-tour-section">
       <p className="sr-only">
-        Interactive 360 degree viewer. Drag horizontally or use the arrow keys when focused. The
-        viewer is loaded only when this section approaches the viewport.
+        Interactive 360 degree viewer. Drag to look around and use the viewer controls to zoom or
+        enter fullscreen. The viewer is loaded only when this section approaches the viewport.
       </p>
       <LazyTourViewer imageSrc={tourImagePath} />
       <div className="container-site studio-tour-copy">
@@ -16,8 +16,8 @@ export function InsideStudioTour() {
           Take a 360 degree look inside Aya Dental Studio
         </h2>
         <p className="mt-5 max-w-2xl text-base leading-7 text-teal-light md:text-lg md:leading-8">
-          Preview the clinic environment before your visit. The final image should show the
-          reception or waiting area with staff, prepared with consent.
+          Explore the reception and waiting area before your visit. Drag the image to look around
+          the clinic at your own pace.
         </p>
       </div>
     </section>

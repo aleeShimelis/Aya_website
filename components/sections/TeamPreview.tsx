@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/Card";
-import { MediaPlaceholder } from "@/components/ui/MediaPlaceholder";
+import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function TeamPreview() {
@@ -14,11 +14,15 @@ export function TeamPreview() {
           />
         </div>
         <Card className="grid gap-6 p-5 md:grid-cols-[0.8fr_1fr] md:p-6 lg:col-span-7 lg:p-7">
-          <MediaPlaceholder
-            label="Real dentist or team photo placeholder"
-            note="TODO: use approved portrait or team image with consent."
-            className="min-h-96"
+        <div className="relative min-h-96 overflow-hidden rounded-card bg-muted-bg">
+          <Image
+            src="/images/team/lead-clinician.PNG"
+            alt="Lead clinician at Aya Dental Studio"
+            fill
+            sizes="(min-width: 768px) 40vw, 100vw"
+            className="object-cover object-top"
           />
+        </div>
           <div className="flex flex-col justify-center">
             <p className="eyebrow">Lead clinician profile</p>
             <h3 className="mt-3 font-serif text-3xl font-semibold leading-tight text-charcoal">
