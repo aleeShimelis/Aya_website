@@ -8,7 +8,6 @@ import { PatientJourney } from "@/components/sections/PatientJourney";
 import { ServicesPreview } from "@/components/sections/ServicesPreview";
 import { TeamPreview } from "@/components/sections/TeamPreview";
 import { TestimonialsPlaceholder } from "@/components/sections/TestimonialsPlaceholder";
-import { TrustStrip } from "@/components/sections/TrustStrip";
 import { InsideStudioTour } from "@/components/sections/InsideStudioTour";
 import { WhyPatientsChooseAya } from "@/components/sections/WhyPatientsChooseAya";
 import { createMetadata } from "@/lib/seo";
@@ -24,7 +23,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <TrustStrip />
       <AboutStudio />
       <ServicesPreview />
       <WhyPatientsChooseAya />

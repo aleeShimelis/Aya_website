@@ -1,5 +1,4 @@
 import { ClipboardCheck, HeartHandshake, ShieldCheck, Sparkles } from "lucide-react";
-import { Card } from "@/components/ui/Card";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const philosophyPoints = [
@@ -27,8 +26,8 @@ const philosophyPoints = [
 
 export function AboutStudio() {
   return (
-    <section className="section-padding bg-background">
-      <div className="container-site grid gap-10 lg:grid-cols-12 lg:items-start">
+    <section className="about-studio-section section-padding">
+      <div className="container-site about-studio-layout">
         <div className="lg:col-span-5">
           <SectionHeading
             eyebrow="About the studio"
@@ -36,15 +35,21 @@ export function AboutStudio() {
             description="Aya Dental Studio is presented as a refined, patient-first clinic experience: clean surroundings, thoughtful appointment flow, and treatment planning that begins with a clear conversation."
           />
         </div>
-        <div className="grid gap-5 sm:grid-cols-2 lg:col-span-7 xl:gap-6">
+        <ol className="about-values">
           {philosophyPoints.map((point) => (
-            <Card key={point.title} className="h-full p-6">
-              <point.icon className="h-6 w-6 text-teal" aria-hidden="true" />
-              <h3 className="mt-5 text-lg font-semibold text-charcoal">{point.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted-text">{point.description}</p>
-            </Card>
+            <li key={point.title} className="about-value">
+              <div className="about-value-content">
+                <div className="about-value-title">
+                  <span className="about-value-icon" aria-hidden="true">
+                    <point.icon />
+                  </span>
+                  <h3>{point.title}</h3>
+                </div>
+                <p>{point.description}</p>
+              </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
