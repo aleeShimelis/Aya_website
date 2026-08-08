@@ -104,18 +104,27 @@ Complete these in order. Use separate production and development credentials.
 
 ### 3.2 Turnstile
 
+Create separate Turnstile configurations for production and pre-production testing. Never add a `workers.dev` hostname to the production widget or production server-side hostname allowlist.
+
+#### Production widget
+
 1. Open **Cloudflare Dashboard > Turnstile > Add widget**.
-2. Give it a production-specific name.
-3. Select **Managed** mode.
-4. Add only the confirmed production hostnames, without protocols or paths.
-5. Save the public site key as `NEXT_PUBLIC_TURNSTILE_SITE_KEY`.
-6. Save the secret key as `TURNSTILE_SECRET_KEY`. Never place it in a `NEXT_PUBLIC_` variable.
-7. Set `TURNSTILE_ALLOWED_HOSTNAMES` to the same approved hostname list, comma-separated.
-8. Create a separate development widget or use Cloudflare's documented test keys for local testing.
+2. Give it a production-specific name and select **Managed** mode.
+3. Add only the confirmed production domain hostname or hostnames, without protocols or paths.
+4. Use its public site key as `NEXT_PUBLIC_TURNSTILE_SITE_KEY` only for the production-domain build.
+5. Store its secret key as `TURNSTILE_SECRET_KEY` only in the production Worker configuration. Never place it in a `NEXT_PUBLIC_` variable.
+6. Set the production `TURNSTILE_ALLOWED_HOSTNAMES` to only the same confirmed production hostname list, comma-separated.
+
+#### `workers.dev` preview and local testing
+
+1. For a realistic `workers.dev` smoke test, create a second **Managed** preview widget and allow only the exact generated `workers.dev` hostname. Use its separate site key, secret key, and matching `TURNSTILE_ALLOWED_HOSTNAMES` value for the preview deployment.
+2. Alternatively, Cloudflare's official test keys may be used in a dedicated non-production test mode. Their documented success response uses test metadata such as `hostname: localhost` and `action: test`. The current application requires the deployment hostname and the form action (`contact` or `appointment`), so a successful full-form smoke test must use the separate preview widget unless an explicit test-only validation path is implemented. Never weaken the production hostname or action checks to accommodate test keys.
+3. Use another development widget or the official test keys for local development as appropriate.
+4. Do not copy preview/test keys or a `workers.dev` hostname into the production widget, production secrets, or production hostname allowlist.
 
 The application already validates each token server-side, checks the expected action (`contact` or `appointment`), checks the returned hostname, and rejects reused, invalid, or unavailable verification.
 
-Reference: [Turnstile setup and mandatory Siteverify validation](https://developers.cloudflare.com/turnstile/get-started/).
+References: [Turnstile setup and mandatory Siteverify validation](https://developers.cloudflare.com/turnstile/get-started/) and [official Turnstile test keys](https://developers.cloudflare.com/turnstile/troubleshooting/testing/).
 
 ### 3.3 Upstash Redis
 
@@ -162,7 +171,7 @@ These values are compiled into the client bundle and must be available while `op
 | Variable | Required | Notes |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Yes | Exact canonical HTTPS origin, no trailing path. |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Yes for forms | Public production Turnstile site key. |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Yes for forms | Use the preview/test site key for the `workers.dev` build and the production site key only for the production-domain build. |
 | `NEXT_PUBLIC_GA4_MEASUREMENT_ID` | No | Keep empty until cookie consent is implemented and approved. |
 
 ### Runtime secrets/configuration
@@ -229,13 +238,13 @@ npm exec wrangler whoami
 
 Confirm that `whoami` shows the intended organization account.
 
-### 6.2 Supply build-time public values
+### 6.2 Supply preview build-time public values
 
-In the same PowerShell session used for the build, set only confirmed values:
+For the initial full `workers.dev` smoke-test build, use the separate preview widget's site key. Official test keys may be substituted only for a dedicated technical test with the test-only validation behavior described in section 3.2. Keep the canonical site URL set to the confirmed production URL so metadata can be validated before launch:
 
 ```powershell
 $env:NEXT_PUBLIC_SITE_URL="https://<confirmed-canonical-hostname>"
-$env:NEXT_PUBLIC_TURNSTILE_SITE_KEY="<production-site-key>"
+$env:NEXT_PUBLIC_TURNSTILE_SITE_KEY="<preview-site-key>"
 $env:NEXT_PUBLIC_GA4_MEASUREMENT_ID=""
 ```
 
@@ -254,7 +263,7 @@ Record the uploaded compressed size. Stop if it exceeds the current Free-plan li
 
 ### 6.4 Add runtime secrets
 
-Run each command and paste its value only into Wrangler's hidden prompt:
+For the full `workers.dev` smoke test, use the preview widget secret and set `TURNSTILE_ALLOWED_HOSTNAMES` to only the exact preview hostname. If a dedicated technical test uses official test keys, use the matching official test secret and the isolated test-only validation behavior described in section 3.2. Run each command and paste its value only into Wrangler's hidden prompt:
 
 ```powershell
 npm exec wrangler secret put TURNSTILE_SECRET_KEY
@@ -275,30 +284,32 @@ Reference: [Cloudflare Workers secrets](https://developers.cloudflare.com/worker
 
 Test the generated `workers.dev` URL before attaching the clinic domain:
 
-1. Load Home, About, Services, one service detail, Gallery, FAQ, Contact, and all legal pages.
-2. Confirm `/robots.txt` and `/sitemap.xml` use the confirmed canonical hostname.
-3. Confirm `/virtual-tour` is `404` and absent from desktop/mobile navigation.
-4. Confirm security headers: CSP, HSTS, `X-Content-Type-Options`, `Referrer-Policy`, and `Permissions-Policy`.
-5. Confirm the hero, logo, service photos, clinician photo, About images, and Gallery images render.
-6. Confirm the 360 image is sharp, starts fully zoomed out, and its file hash/byte count matches the source.
-7. Confirm the 360 network request is absent at initial page load and occurs only near the section.
-8. Test both forms using clearly fictional non-clinical data. Confirm one email per submission and no email for invalid Turnstile tokens.
-9. Submit more than five requests within ten minutes from one client and verify `429` plus `Retry-After`.
-10. Check Turnstile Analytics, Upstash counters, Resend logs, and Workers logs for the same test window.
-11. Run current Lighthouse mobile and desktop audits against this Cloudflare URL. Do not accept the local emulator's performance result as the final production score.
+1. Confirm the full preview uses the separate preview widget and exact `workers.dev` hostname allowlist. If official test keys are used for a separate technical test, confirm they are isolated from production and do not replace the preview-widget hostname/action test. Confirm the production widget is unchanged and does not allow `workers.dev`.
+2. Load Home, About, Services, one service detail, Gallery, FAQ, Contact, and all legal pages.
+3. Confirm `/robots.txt` and `/sitemap.xml` use the confirmed canonical hostname.
+4. Confirm `/virtual-tour` is `404` and absent from desktop/mobile navigation.
+5. Confirm security headers: CSP, HSTS, `X-Content-Type-Options`, `Referrer-Policy`, and `Permissions-Policy`.
+6. Confirm the hero, logo, service photos, clinician photo, About images, and Gallery images render.
+7. Confirm the 360 image is sharp, starts fully zoomed out, and its file hash/byte count matches the source.
+8. Confirm the 360 network request is absent at initial page load and occurs only near the section.
+9. Test both forms using clearly fictional non-clinical data. Confirm one email per submission and no email for invalid Turnstile tokens.
+10. Submit more than five requests within ten minutes from one client and verify `429` plus `Retry-After`.
+11. Check Turnstile Analytics, Upstash counters, Resend logs, and Workers logs for the same test window.
+12. Run current Lighthouse mobile and desktop audits against this real Cloudflare preview. This is the required final performance measurement; do not accept the local emulator's result as the production score.
 
 ## 8. Attach the Production Domain
 
 After smoke tests and legal approval:
 
-1. In Cloudflare, open **Workers & Pages > aya-dental-studio**.
-2. Open **Settings > Domains & Routes**.
-3. Select **Add > Custom Domain**.
-4. Enter the confirmed canonical hostname.
-5. Select **Add Custom Domain** and wait for DNS/certificate activation.
-6. Configure the alternate `www` or apex hostname as a Cloudflare redirect to the canonical hostname. Do not serve duplicate content on both.
-7. Recheck the Turnstile hostname allowlist and `TURNSTILE_ALLOWED_HOSTNAMES`.
-8. Rebuild if `NEXT_PUBLIC_SITE_URL` or the public Turnstile site key changed.
+1. Rebuild using the production `NEXT_PUBLIC_TURNSTILE_SITE_KEY`; do not reuse the preview/test site key in the production-domain build.
+2. Replace the preview Turnstile secret with the production `TURNSTILE_SECRET_KEY` and set `TURNSTILE_ALLOWED_HOSTNAMES` to only the confirmed production hostname list.
+3. Confirm again that the production Turnstile widget allows only the production domain and does not include the `workers.dev` preview hostname.
+4. In Cloudflare, open **Workers & Pages > aya-dental-studio**.
+5. Open **Settings > Domains & Routes**.
+6. Select **Add > Custom Domain**.
+7. Enter the confirmed canonical hostname.
+8. Select **Add Custom Domain** and wait for DNS/certificate activation.
+9. Configure the alternate `www` or apex hostname as a Cloudflare redirect to the canonical hostname. Do not serve duplicate content on both.
 
 Reference: [Workers Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/).
 
@@ -336,5 +347,5 @@ Reference: [Workers Builds configuration](https://developers.cloudflare.com/work
 - Confirm Google Business Profile and the exact Google Maps pin/coordinates.
 - Set up Google Search Console and submit `/sitemap.xml` after the canonical domain is live.
 - Implement cookie consent before adding GA4. Keep `NEXT_PUBLIC_GA4_MEASUREMENT_ID` empty until then.
-- Resolve the remaining mobile performance work, especially the embedded-raster `1.15 MiB` logo and font-driven layout shift, then rerun current Lighthouse on a Cloudflare URL.
+- Logo and font optimization are complete: the active logo delivery asset is `32 KiB`, fonts are self-hosted and preloaded through `next/font/local`, and optimized local Lighthouse reports `CLS = 0`. Repeat current mobile and desktop Lighthouse against the real Cloudflare preview as the final performance launch gate.
 - Run a real end-to-end form test only after approved Turnstile, Upstash, and email credentials are supplied.
