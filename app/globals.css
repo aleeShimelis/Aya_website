@@ -9,7 +9,7 @@
   --color-muted-text: #5d6b6f;
   --color-charcoal: #172124;
   --color-slate: #33464d;
-  --color-teal: #2f8f8a;
+  --color-teal: #1f716d;
   --color-teal-light: #dff1ef;
   --color-border: #d9e2e0;
   --color-card-bg: #ffffff;
@@ -778,6 +778,14 @@ button {
 }
 
 @media (max-width: 767px) {
+  .tour-viewer-viewport .psv-navbar--open {
+    bottom: calc(4.75rem + env(safe-area-inset-bottom));
+  }
+
+  .tour-viewer-viewport .psv-overlay {
+    bottom: calc(7.75rem + env(safe-area-inset-bottom));
+  }
+
   .journey-map {
     margin-top: 2.5rem;
   }

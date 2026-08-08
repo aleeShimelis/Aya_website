@@ -39,7 +39,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "Manrope Variable",
+          "var(--font-manrope)",
           "Aptos",
           "Segoe UI Variable",
           "ui-sans-serif",
@@ -47,8 +47,8 @@ const config: Config = {
           "sans-serif"
         ],
         serif: [
-          "Space Grotesk Variable",
-          "Manrope Variable",
+          "var(--font-space-grotesk)",
+          "var(--font-manrope)",
           "ui-sans-serif",
           "system-ui",
           "sans-serif"

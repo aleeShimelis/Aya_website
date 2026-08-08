@@ -10,23 +10,26 @@ import { createMetadata } from "@/lib/seo";
 import { breadcrumbSchema, faqSchema, serviceSchema } from "@/lib/schema";
 
 type ServicePageProps = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
 }
 
-export function generateMetadata({ params }: ServicePageProps): Metadata {
-  const service = getServiceBySlug(params.slug);
+export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
 
   if (!service) {
     return createMetadata({
       title: "Service Not Found | Aya Dental Studio",
       description: "The requested dental service could not be found.",
-      path: `/services/${params.slug}`
+      path: `/services/${slug}`
     });
   }
 
@@ -37,8 +40,9 @@ export function generateMetadata({ params }: ServicePageProps): Metadata {
   });
 }
 
-export default function ServiceDetailPage({ params }: ServicePageProps) {
-  const service = getServiceBySlug(params.slug);
+export default async function ServiceDetailPage({ params }: ServicePageProps) {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
 
   if (!service) {
     notFound();

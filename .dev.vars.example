@@ -1,0 +1,13 @@
+# Local Cloudflare preview only. Never commit real values.
+NEXTJS_ENV="development"
+NEXT_PUBLIC_SITE_URL="http://localhost:8787"
+NEXT_PUBLIC_TURNSTILE_SITE_KEY="replace-with-turnstile-test-or-development-site-key"
+TURNSTILE_SECRET_KEY="replace-with-turnstile-test-or-development-secret-key"
+TURNSTILE_ALLOWED_HOSTNAMES="localhost"
+RESEND_API_KEY="replace-with-resend-development-key"
+CONTACT_FORM_TO_EMAIL="replace-with-approved-test-inbox"
+FORM_FROM_EMAIL="replace-with-verified-development-sender"
+RATE_LIMIT_REDIS_REST_URL="replace-with-upstash-development-url"
+RATE_LIMIT_REDIS_REST_TOKEN="replace-with-upstash-development-token"
+RATE_LIMIT_HASH_SECRET="replace-with-a-high-entropy-development-secret"
+NEXT_PUBLIC_GA4_MEASUREMENT_ID=""

@@ -15,9 +15,6 @@ export default function TourViewer({ imageSrc }: TourViewerProps) {
     let disposed = false;
     let viewer: { destroy: () => void } | undefined;
 
-    setIsReady(false);
-    setHasError(false);
-
     import("@photo-sphere-viewer/core")
       .then(({ Viewer, events }) => {
         if (disposed || !viewerRef.current) {

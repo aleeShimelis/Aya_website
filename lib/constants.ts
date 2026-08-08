@@ -17,7 +17,8 @@ export const siteConfig = {
   mapEmbedUrl:
     "https://www.google.com/maps?q=Bole%20Atlas%20Traffic%20Light%20Landmark%20Plaza%20Addis%20Ababa&output=embed",
   ogImage: "/images/og-placeholder.svg",
-  logoPath: "/logo/aya-dental-studio-logo.svg",
+  logoPath: "/logo/aya-dental-studio-logo.webp",
+  faviconPath: "/logo/aya-dental-studio-icon.png",
   socialLinks: {
     facebook: "#todo-facebook",
     instagram: "#todo-instagram",

@@ -13,6 +13,7 @@ export function Hero() {
             alt="Aya Dental Studio reception area"
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
             className="hero-image"
           />

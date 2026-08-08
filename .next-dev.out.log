@@ -16,3 +16,26 @@
  ✓ Compiled /contact in 1544ms (723 modules)
  GET /contact 200 in 1885ms
  ✓ Compiled in 612ms (325 modules)
+ GET / 200 in 166ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 5.7s (701 modules)
+ ✓ Compiled in 2.4s (325 modules)
+ GET /icons/icon-192.png 404 in 8463ms
+ GET /icons/icon-192.png 404 in 378ms
+ ○ Compiling /about ...
+ ✓ Compiled /about in 796ms (691 modules)
+ ✓ Compiled /_not-found in 198ms (380 modules)
+ GET /icons/icon-192.png 404 in 485ms
+ ○ Compiling /services ...
+ ✓ Compiled /services in 534ms (708 modules)
+ GET /icons/icon-192.png 404 in 85ms
+ ✓ Compiled /gallery in 296ms (696 modules)
+ GET /icons/icon-192.png 404 in 58ms
+ ○ Compiling /faq ...
+ ✓ Compiled /faq in 664ms (700 modules)
+ GET /icons/icon-192.png 404 in 136ms
+ ✓ Compiled /contact in 289ms (409 modules)
+ GET /icons/icon-192.png 404 in 113ms
+ GET /contact 200 in 120ms
+ GET /icons/icon-192.png 404 in 68ms
+ GET /icons/icon-192.png 404 in 64ms

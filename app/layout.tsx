@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import type { ReactNode } from "react";
-import "@fontsource-variable/manrope";
-import "@fontsource-variable/space-grotesk";
 import "@photo-sphere-viewer/core/index.css";
 import "./globals.css";
 import { Footer } from "@/components/layout/Footer";
@@ -13,6 +12,26 @@ import { siteConfig } from "@/lib/constants";
 import { createMetadata } from "@/lib/seo";
 import { organizationSchema } from "@/lib/schema";
 
+const manrope = localFont({
+  src: "../node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2",
+  variable: "--font-manrope",
+  display: "swap",
+  weight: "200 800",
+  fallback: ["Arial", "sans-serif"],
+  adjustFontFallback: "Arial",
+  preload: true
+});
+
+const spaceGrotesk = localFont({
+  src: "../node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2",
+  variable: "--font-space-grotesk",
+  display: "swap",
+  weight: "300 700",
+  fallback: ["Arial", "sans-serif"],
+  adjustFontFallback: "Arial",
+  preload: true
+});
+
 export const metadata: Metadata = {
   ...createMetadata({
     title: "Aya Dental Studio | Dental Clinic in Addis Ababa",
@@ -20,7 +39,10 @@ export const metadata: Metadata = {
       "Aya Dental Studio is a calm, premium dental clinic experience near Bole Atlas in Addis Ababa.",
     path: "/"
   }),
-  manifest: "/manifest.json"
+  manifest: "/manifest.json",
+  icons: {
+    icon: [{ url: siteConfig.faviconPath, type: "image/png" }]
+  }
 };
 
 export const viewport: Viewport = {
@@ -31,7 +53,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${manrope.variable} ${spaceGrotesk.variable}`}>
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
