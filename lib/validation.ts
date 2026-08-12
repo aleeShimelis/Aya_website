@@ -6,26 +6,71 @@ const serviceValues = services.map((service) => service.slug) as [string, ...str
 
 const textField = z
   .string()
-  .trim()
-  .min(2, "Please enter at least 2 characters.")
-  .max(120, "Please keep this under 120 characters.")
-  .transform(sanitizeText);
+  .transform(sanitizeText)
+  .pipe(
+    z
+      .string()
+      .min(2, "Please enter at least 2 characters.")
+      .max(120, "Please keep this under 120 characters.")
+  );
 
 const phoneField = z
   .string()
-  .trim()
-  .min(7, "Please enter a valid phone number.")
-  .max(30, "Please keep this under 30 characters.")
-  .regex(/^[+0-9\s()-]+$/, "Please use a valid phone number.")
-  .transform(sanitizeText);
+  .transform(sanitizeText)
+  .pipe(
+    z
+      .string()
+      .min(7, "Please enter a valid phone number.")
+      .max(30, "Please keep this under 30 characters.")
+      .regex(/^[+0-9\s()-]+$/, "Please use a valid phone number.")
+  );
 
 const messageField = z
   .string()
-  .trim()
-  .max(500, "Please keep your message under 500 characters.")
   .transform(sanitizeText)
+  .pipe(z.string().max(500, "Please keep your message under 500 characters."))
   .optional()
   .or(z.literal(""));
+
+function validCalendarDate(value: string) {
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day
+  );
+}
+
+const clinicDateFormatter = new Intl.DateTimeFormat("en", {
+  timeZone: "Africa/Addis_Ababa",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit"
+});
+
+function clinicToday() {
+  const parts = Object.fromEntries(
+    clinicDateFormatter
+      .formatToParts(new Date())
+      .filter(({ type }) => type === "year" || type === "month" || type === "day")
+      .map(({ type, value }) => [type, value])
+  );
+
+  return `${parts.year}-${parts.month}-${parts.day}`;
+}
+
+function isTodayOrLater(value: string) {
+  return value >= clinicToday();
+}
+
+const appointmentDateField = z
+  .string()
+  .trim()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, "Please enter a valid date.")
+  .refine(validCalendarDate, "Please enter a valid date.")
+  .refine(isTodayOrLater, "Please choose today or a future date.");
 
 export const appointmentSchema = z.object({
   fullName: textField,
@@ -36,12 +81,7 @@ export const appointmentSchema = z.object({
   service: z.enum(serviceValues, {
     required_error: "Please choose a service."
   }),
-  preferredDate: z
-    .string()
-    .trim()
-    .min(1, "Please choose a preferred date.")
-    .max(20, "Please enter a valid date.")
-    .transform(sanitizeText),
+  preferredDate: appointmentDateField,
   message: messageField,
   privacyConsent: z.literal(true, {
     errorMap: () => ({ message: "Please confirm that you agree to the privacy notice." })
@@ -57,10 +97,13 @@ export const contactSchema = z.object({
   }),
   message: z
     .string()
-    .trim()
-    .min(5, "Please enter a short message.")
-    .max(500, "Please keep your message under 500 characters.")
-    .transform(sanitizeText),
+    .transform(sanitizeText)
+    .pipe(
+      z
+        .string()
+        .min(5, "Please enter a short message.")
+        .max(500, "Please keep your message under 500 characters.")
+    ),
   privacyConsent: z.literal(true, {
     errorMap: () => ({ message: "Please confirm that you agree to the privacy notice." })
   }),

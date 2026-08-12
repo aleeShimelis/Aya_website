@@ -44,7 +44,6 @@ export function AppointmentForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const selectedService = services.find((service) => service.slug === formData.get("service"));
     const payload = {
       fullName: String(formData.get("fullName") || ""),
       phone: String(formData.get("phone") || ""),
@@ -67,6 +66,7 @@ export function AppointmentForm() {
         ok: boolean;
         message?: string;
         errors?: FieldErrors;
+        confirmation?: Confirmation;
       };
 
       if (!response.ok || !result.ok) {
@@ -76,15 +76,15 @@ export function AppointmentForm() {
         return;
       }
 
+      if (!result.confirmation) {
+        setStatus("error");
+        setMessage("We received an unexpected response. Please call or use WhatsApp instead.");
+        return;
+      }
+
       setStatus("success");
       setMessage(result.message || "Your appointment request has been received.");
-      setConfirmation({
-        fullName: payload.fullName,
-        phone: payload.phone,
-        preferredContact: payload.preferredContact,
-        service: selectedService?.title || payload.service,
-        preferredDate: payload.preferredDate
-      });
+      setConfirmation(result.confirmation);
       form.reset();
     } catch {
       setStatus("error");

@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { deliverFormNotification } from "@/lib/form-delivery";
+import { FormRequestError, readFormJson } from "@/lib/form-request";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { verifyTurnstileToken } from "@/lib/security";
 import { contactSchema } from "@/lib/validation";
@@ -13,6 +14,24 @@ function fieldErrors(error: ZodError) {
 }
 
 export async function POST(request: Request) {
+  let body: unknown;
+
+  try {
+    body = await readFormJson(request);
+  } catch (error) {
+    if (error instanceof FormRequestError) {
+      return NextResponse.json(
+        { ok: false, message: error.message },
+        { status: error.status, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+
+    return NextResponse.json(
+      { ok: false, message: "We could not submit the form. Please try again." },
+      { status: 400, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
   const limit = await checkRateLimit(request, "contact");
 
   if (limit.status === "unavailable") {
@@ -40,9 +59,29 @@ export async function POST(request: Request) {
     );
   }
 
+  let parsed: ReturnType<typeof contactSchema.parse>;
+
   try {
-    const body = await request.json();
-    const parsed = contactSchema.parse(body);
+    parsed = contactSchema.parse(body);
+  } catch (error) {
+    if (error instanceof ZodError) {
+      return NextResponse.json(
+        {
+          ok: false,
+          message: "Please review the highlighted fields.",
+          errors: fieldErrors(error)
+        },
+        { status: 400, headers: { "Cache-Control": "no-store" } }
+      );
+    }
+
+    return NextResponse.json(
+      { ok: false, message: "We could not submit the form. Please try again." },
+      { status: 400, headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
+  try {
     const verification = await verifyTurnstileToken({
       token: parsed.turnstileToken,
       expectedAction: "contact",
@@ -92,18 +131,7 @@ export async function POST(request: Request) {
       },
       { headers: { "Cache-Control": "no-store" } }
     );
-  } catch (error) {
-    if (error instanceof ZodError) {
-      return NextResponse.json(
-        {
-          ok: false,
-          message: "Please review the highlighted fields.",
-          errors: fieldErrors(error)
-        },
-        { status: 400, headers: { "Cache-Control": "no-store" } }
-      );
-    }
-
+  } catch {
     return NextResponse.json(
       { ok: false, message: "We could not submit the form. Please try again." },
       { status: 500, headers: { "Cache-Control": "no-store" } }
