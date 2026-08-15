@@ -16,6 +16,7 @@
   },
   "vars": {
     "FORM_DELIVERY_PROVIDER": "resend",
-    "RATE_LIMIT_IP_HEADER": "cf-connecting-ip"
+    "RATE_LIMIT_IP_HEADER": "cf-connecting-ip",
+    "TURNSTILE_ALLOWED_HOSTNAMES": "aya-dental-studio.aya-dental-studio.workers.dev"
   }
 }

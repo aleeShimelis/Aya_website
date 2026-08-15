@@ -11,13 +11,15 @@ import {
 
 export type ServiceSlug =
   | "teeth-whitening"
+  | "veneers"
   | "dental-implants"
   | "tooth-extraction"
   | "dental-cleaning"
   | "fillings"
   | "root-canal"
   | "crowns-and-bridges"
-  | "orthodontics";
+  | "orthodontics"
+  | "maxillofacial-surgery";
 
 export type Service = {
   slug: ServiceSlug;
@@ -76,6 +78,47 @@ export const services: Service[] = [
     seoTitle: "Teeth Whitening in Addis Ababa | Aya Dental Studio",
     seoDescription:
       "Explore consultation-led teeth whitening in Addis Ababa with Aya Dental Studio near Bole Atlas."
+  },
+  {
+    slug: "veneers",
+    title: "Dental Veneers",
+    shortTitle: "Veneers",
+    summary: "Personalized veneer planning for selected concerns involving tooth shape, color, or spacing.",
+    description:
+      "Veneers require careful assessment of tooth health, enamel, bite, appearance goals, and suitable alternatives before treatment.",
+    icon: Gem,
+    intro:
+      "Dental veneers may improve the appearance of selected teeth by changing their visible shape, color, or proportions. Aya Dental Studio should confirm suitability and explain conservative alternatives during consultation.",
+    recommendedFor: [
+      "Selected discolored teeth that may not respond predictably to whitening",
+      "Minor concerns involving tooth shape, size, or spacing",
+      "Patients seeking a consultation about a balanced, natural-looking smile"
+    ],
+    expectations: [
+      "The dentist checks tooth and gum health, enamel, and bite",
+      "Your goals, material options, limitations, and alternatives are discussed",
+      "The proposed shape and appearance are planned before final treatment"
+    ],
+    aftercare: [
+      "Clean carefully around the veneer margins every day",
+      "Avoid biting hard objects or using teeth to open items",
+      "Attend routine reviews and report chips, movement, or sensitivity"
+    ],
+    faq: [
+      {
+        question: "Are veneers suitable for every cosmetic concern?",
+        answer:
+          "No. Tooth health, enamel, bite, and the type of concern all affect suitability. Whitening, orthodontics, or restorative care may sometimes be more appropriate."
+      },
+      {
+        question: "Do veneers require ongoing care?",
+        answer:
+          "Yes. Veneers need careful daily cleaning, routine dental reviews, and protection from habits that may chip or damage them."
+      }
+    ],
+    seoTitle: "Dental Veneers in Addis Ababa | Aya Dental Studio",
+    seoDescription:
+      "Explore consultation-led dental veneer planning at Aya Dental Studio near Bole Atlas in Addis Ababa."
   },
   {
     slug: "dental-implants",
@@ -363,6 +406,48 @@ export const services: Service[] = [
     seoTitle: "Orthodontics in Addis Ababa | Aya Dental Studio",
     seoDescription:
       "Orthodontic consultation for braces and alignment options at Aya Dental Studio in Addis Ababa."
+  },
+  {
+    slug: "maxillofacial-surgery",
+    title: "Maxillofacial Surgery",
+    shortTitle: "Maxillofacial Surgery",
+    summary:
+      "Specialist assessment and surgical planning for conditions affecting the mouth, jaws, and face.",
+    description:
+      "Maxillofacial care begins with careful assessment, appropriate imaging, and a clear discussion of surgical and non-surgical options.",
+    icon: ShieldCheck,
+    intro:
+      "Maxillofacial surgery addresses selected conditions involving the mouth, jaws, facial structures, and related tissues. Suitability and treatment steps must be confirmed through specialist assessment.",
+    recommendedFor: [
+      "Complex or impacted teeth requiring surgical assessment",
+      "Jaw, facial, or oral conditions that may need specialist care",
+      "Patients referred for an oral or maxillofacial surgical opinion"
+    ],
+    expectations: [
+      "The clinician reviews symptoms, medical history, and previous records",
+      "Imaging or further specialist investigation may be recommended",
+      "Treatment options, recovery, risks, and referral needs are explained before decisions are made"
+    ],
+    aftercare: [
+      "Follow the surgical and medication instructions provided by the clinical team",
+      "Attend all planned reviews and follow-up appointments",
+      "Contact the clinic promptly if pain, swelling, bleeding, or other symptoms worsen"
+    ],
+    faq: [
+      {
+        question: "Do all maxillofacial concerns require surgery?",
+        answer:
+          "No. The appropriate approach depends on the condition and clinical findings. Assessment is needed before treatment is recommended."
+      },
+      {
+        question: "Will I need imaging before treatment?",
+        answer:
+          "Imaging is often useful for surgical planning, but the clinician will decide what is appropriate after reviewing your concern and history."
+      }
+    ],
+    seoTitle: "Maxillofacial Surgery in Addis Ababa | Aya Dental Studio",
+    seoDescription:
+      "Explore specialist maxillofacial surgery assessment and treatment planning at Aya Dental Studio in Addis Ababa."
   }
 ];
 

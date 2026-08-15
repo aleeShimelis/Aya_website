@@ -11,7 +11,7 @@ export const siteConfig = {
   whatsappNumber: "251985200000",
   addressShort: "Bole Atlas, Addis Ababa",
   addressFull: "Bole Atlas Traffic Light, Landmark Plaza, 2nd Floor, Addis Ababa",
-  hoursPlaceholder: "Opening hours: TODO",
+  hoursPlaceholder: "Opening hours: 2:30 to 12:00 LT",
   mapUrl:
     "https://www.google.com/maps/search/?api=1&query=Bole%20Atlas%20Traffic%20Light%20Landmark%20Plaza%20Addis%20Ababa",
   mapEmbedUrl:

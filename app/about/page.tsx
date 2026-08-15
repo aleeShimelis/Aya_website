@@ -23,13 +23,13 @@ export default function AboutPage() {
         description="Aya Dental Studio is prepared as a premium, patient-first clinic experience. Verified clinic story, dentist credentials, and real team photos should be added before launch."
       />
       <section className="section-padding bg-background">
-        <div className="container-site grid gap-10 lg:grid-cols-[0.9fr_1fr]">
-          <div className="relative min-h-96 overflow-hidden rounded-card border border-border">
+        <div className="container-site grid gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-stretch">
+          <div className="relative min-h-[30rem] overflow-hidden rounded-card border border-border lg:min-h-[44rem]">
             <Image
               src="/images/about/clinic-interior.jpg"
               alt="Interior of Aya Dental Studio"
               fill
-              sizes="(min-width: 1024px) 45vw, 100vw"
+              sizes="(min-width: 1024px) 65vw, 100vw"
               quality={90}
               className="object-cover"
             />

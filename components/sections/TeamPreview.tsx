@@ -1,49 +1,97 @@
-import { Card } from "@/components/ui/Card";
 import Image from "next/image";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { UserRound } from "lucide-react";
+
+const specialists = [
+  {
+    name: "Dr. Aymen Ayoub",
+    title: "Senior Surgeon, Endodontist and Cosmetic Specialist",
+    imageSrc: "/images/team/lead-clinician.jpg",
+    imageAlt: "Dr. Aymen Ayoub, senior surgeon, endodontist, and cosmetic specialist at Aya Dental Studio",
+    imagePosition: "22% 8%"
+  },
+  {
+    name: "Dr. Ismael Muze",
+    title: "Chief Orthodontist",
+    imageSrc: "/images/team/orthodontist.png",
+    imageAlt: "Dr. Ismael Muze, Chief Orthodontist at Aya Dental Studio",
+    imagePosition: "22% 8%"
+  },
+  {
+    name: "Dr. Tewodros Molla",
+    title: "Chief Maxillofacial Surgeon",
+    imageSrc: "/images/team/maxillofacial-surgeon.png",
+    imageAlt: "Dr. Tewodros Molla, chief maxilofacial surgeon at Aya Dental Studio",
+    imagePosition: "22% 8%"
+  },
+  {
+    name: "Name to be confirmed",
+    title: "Specialty to be confirmed"
+  }
+] as const;
 
 export function TeamPreview() {
   return (
-    <section className="section-padding bg-muted-bg">
-      <div className="container-site grid items-center gap-10 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <SectionHeading
-            eyebrow="About the team"
-            title="A polished profile, ready for verified clinic details."
-            description="Aya's team area should feel personal and credible without inventing doctors, years, ratings, patient counts, or credentials."
-          />
+    <section className="team-section" aria-labelledby="team-heading">
+      <div className="team-intro">
+        <div className="team-intro-copy">
+          <p className="eyebrow">Aya Dental Studio</p>
+          <h2 id="team-heading" className="team-intro-title">
+            Specialized team
+          </h2>
+          <span className="team-intro-rule" aria-hidden="true" />
+          <blockquote className="team-intro-quote">
+            Our clinicians work together to make every consultation clear, coordinated, and
+            centered on the care each patient needs.
+          </blockquote>
+          <span className="team-intro-rule" aria-hidden="true" />
         </div>
-        <Card className="grid gap-6 p-5 md:grid-cols-[0.8fr_1fr] md:p-6 lg:col-span-7 lg:p-7">
-        <div className="relative min-h-96 overflow-hidden rounded-card bg-muted-bg">
+
+        <div className="team-intro-media">
           <Image
-            src="/images/team/lead-clinician.PNG"
-            alt="Lead clinician at Aya Dental Studio"
+            src="/images/team/team-portrait.jpg"
+            alt="Members of the Aya Dental Studio clinical team"
             fill
-            sizes="(min-width: 768px) 40vw, 100vw"
-            className="object-cover object-top"
+            sizes="(min-width: 900px) 32rem, 100vw"
+            quality={90}
+            className="team-intro-image"
           />
         </div>
-          <div className="flex flex-col justify-center">
-            <p className="eyebrow">Lead clinician profile</p>
-            <h3 className="mt-3 font-serif text-3xl font-semibold leading-tight text-charcoal">
-              Name placeholder
-            </h3>
-            <p className="mt-2 font-semibold text-slate">Role placeholder</p>
-            <dl className="mt-6 grid gap-4">
-              {[
-                ["Credentials", "TODO: add verified degrees, certifications, and affiliations."],
-                ["Areas of care", "TODO: add clinic-approved focus areas."],
-                ["Languages spoken", "TODO: confirm languages before publishing."],
-                ["Clinic note", "TODO: add a short approved profile written in Aya's tone."]
-              ].map(([label, value]) => (
-                <div key={label} className="rounded-card bg-muted-bg p-4">
-                  <dt className="text-sm font-semibold text-charcoal">{label}</dt>
-                  <dd className="mt-1 text-sm leading-6 text-muted-text">{value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </Card>
+      </div>
+
+      <div className="container-site team-specialists">
+        <div className="team-specialists-heading">
+          <p className="eyebrow">Our specialists</p>
+          <h3>Meet the clinicians behind your care.</h3>
+        </div>
+
+        <div className="team-specialist-grid">
+          {specialists.map((specialist, index) => (
+            <article className="team-specialist" key={`${specialist.name}-${index}`}>
+              <div className="team-specialist-portrait">
+                {"imageSrc" in specialist ? (
+                  <Image
+                    src={specialist.imageSrc}
+                    alt={specialist.imageAlt}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    quality={90}
+                    className="team-specialist-image"
+                    style={{ objectPosition: specialist.imagePosition }}
+                  />
+                ) : (
+                  <div className="team-specialist-placeholder" aria-label="Specialist photo pending">
+                    <UserRound aria-hidden="true" />
+                    <span>Photo pending</span>
+                  </div>
+                )}
+              </div>
+              <div className="team-specialist-caption">
+                <h4>{specialist.name}</h4>
+                <p>{specialist.title}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

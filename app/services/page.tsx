@@ -9,7 +9,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = createMetadata({
   title: "Dental Services in Addis Ababa | Aya Dental Studio",
   description:
-    "Explore teeth whitening, dental implants, root canal treatment, cleaning, fillings, crowns, bridges, orthodontics, and extraction services.",
+    "Explore teeth whitening, implants, root canal treatment, cleaning, restorative care, orthodontics, extraction, and maxillofacial surgery.",
   path: "/services"
 });
 

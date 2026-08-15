@@ -79,11 +79,14 @@ export function MobileMenu() {
       </button>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-50 bg-charcoal/80 backdrop-blur-sm" role="presentation">
+        <div
+          className="mobile-menu-overlay fixed inset-0 z-50 backdrop-blur-sm"
+          role="presentation"
+        >
           <div
             ref={panelRef}
             id="mobile-menu"
-            className="ml-auto flex h-full w-full max-w-sm flex-col bg-background p-5 shadow-elevated"
+            className="mobile-menu-panel ml-auto flex h-full w-full max-w-sm flex-col overflow-y-auto p-5 shadow-elevated"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation"

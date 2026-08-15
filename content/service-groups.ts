@@ -28,18 +28,23 @@ export const serviceGroups: ServiceGroup[] = [
   {
     title: "Cosmetic Care",
     description:
-      "Consultation-led smile brightening for patients who want a refreshed, natural-looking result.",
+      "Consultation-led whitening and veneer planning for patients seeking a refreshed, natural-looking smile.",
     imageSrc: "/images/services/cosmetic-care.jpeg",
     imageAlt: "Before and after comparison of cosmetic dental care",
-    serviceSlugs: ["teeth-whitening"]
+    serviceSlugs: ["teeth-whitening", "veneers"]
   },
   {
     title: "Advanced Care",
     description:
-      "Thoughtful planning for missing teeth, extractions, and alignment questions that need careful assessment.",
+      "Thoughtful planning for missing teeth, extractions, alignment, and maxillofacial concerns that need careful assessment.",
     imageSrc: "/images/services/advanced-care.jpg",
     imageAlt: "Reception area inside Aya Dental Studio",
-    serviceSlugs: ["dental-implants", "tooth-extraction", "orthodontics"]
+    serviceSlugs: [
+      "dental-implants",
+      "tooth-extraction",
+      "orthodontics",
+      "maxillofacial-surgery"
+    ]
   }
 ];
 

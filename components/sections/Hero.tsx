@@ -1,24 +1,12 @@
-import Image from "next/image";
 import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
+import { HeroSlideshow } from "@/components/sections/HeroSlideshow";
 import { ButtonLink } from "@/components/ui/Button";
 import { contactActions } from "@/lib/constants";
 
 export function Hero() {
   return (
     <section className="hero-section border-b border-border">
-      <div className="hero-media">
-        <div className="hero-media-frame">
-          <Image
-            src="/images/hero/aya-reception.jpg"
-            alt="Aya Dental Studio reception area"
-            fill
-            priority
-            fetchPriority="high"
-            sizes="100vw"
-            className="hero-image"
-          />
-        </div>
-      </div>
+      <HeroSlideshow />
       <div className="container-site hero-grid flex items-center">
         <div className="hero-copy">
           <p className="eyebrow mb-4">Aya Dental Studio - Bole Atlas</p>
