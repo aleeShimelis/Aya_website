@@ -6,11 +6,11 @@ import { Pause, Play } from "lucide-react";
 
 const slides = [
   {
-    src: "/images/hero/DrAymen.png",
-    alt: "Dr. Aymen Ayoub at Aya Dental Studio"
+    src: "/images/hero/aya-reception.jpg",
+    alt: "Aya Dental Studio reception area"
   },
   {
-    src: "/images/hero/aya-reception.jpg",
+    src: "/images/hero/DrAymen.jpg",
     alt: "Reception and waiting area at Aya Dental Studio"
   }
 ] as const;
