@@ -41,7 +41,10 @@ export default function ContactPage() {
                 </a>
                 <a className="flex items-start gap-3 hover:text-teal" href={contactActions.map}>
                   <MapPin className="mt-1 h-5 w-5 text-teal" aria-hidden="true" />
-                  <span>{siteConfig.addressFull}</span>
+                  <span>
+                    <span className="block">{siteConfig.addressFull}</span>
+                    <span className="mt-1 block text-sm">Google Maps: {siteConfig.plusCode}</span>
+                  </span>
                 </a>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
@@ -55,7 +58,7 @@ export default function ContactPage() {
             </Card>
             <Card className="overflow-hidden p-0">
               <iframe
-                title="Map to Aya Dental Studio location placeholder"
+                title="Map to Aya Dental Studio"
                 src={siteConfig.mapEmbedUrl}
                 className="h-80 w-full border-0"
                 loading="lazy"

@@ -21,6 +21,14 @@ export type ServiceSlug =
   | "orthodontics"
   | "maxillofacial-surgery";
 
+export type BeforeAfterCase = {
+  comparisonOneSrc: string;
+  comparisonOneAlt: string;
+  comparisonTwoSrc: string;
+  comparisonTwoAlt: string;
+  caption?: string;
+};
+
 export type Service = {
   slug: ServiceSlug;
   title: string;
@@ -32,10 +40,24 @@ export type Service = {
   recommendedFor: string[];
   expectations: string[];
   aftercare: string[];
+  beforeAfterCases?: BeforeAfterCase[];
   faq: Array<{ question: string; answer: string }>;
   seoTitle: string;
   seoDescription: string;
 };
+
+function createBeforeAfterCases(slug: ServiceSlug, serviceTitle: string): BeforeAfterCase[] {
+  const description = serviceTitle.toLowerCase();
+
+  return [
+    {
+      comparisonOneSrc: `/images/services/before-after/${slug}/case-1.jpg`,
+      comparisonOneAlt: `First stitched before-and-after ${description} case at Aya Dental Studio`,
+      comparisonTwoSrc: `/images/services/before-after/${slug}/case-2.jpg`,
+      comparisonTwoAlt: `Second stitched before-and-after ${description} case at Aya Dental Studio`
+    }
+  ];
+}
 
 export const services: Service[] = [
   {
@@ -63,6 +85,7 @@ export const services: Service[] = [
       "Avoid staining foods and drinks as advised",
       "Report prolonged sensitivity to the clinic"
     ],
+    beforeAfterCases: createBeforeAfterCases("teeth-whitening", "teeth whitening"),
     faq: [
       {
         question: "Is whitening right for everyone?",
@@ -104,6 +127,7 @@ export const services: Service[] = [
       "Avoid biting hard objects or using teeth to open items",
       "Attend routine reviews and report chips, movement, or sensitivity"
     ],
+    beforeAfterCases: createBeforeAfterCases("veneers", "dental veneers"),
     faq: [
       {
         question: "Are veneers suitable for every cosmetic concern?",
@@ -145,6 +169,7 @@ export const services: Service[] = [
       "Attend follow-up visits as recommended",
       "Report pain, swelling, or looseness promptly"
     ],
+    beforeAfterCases: createBeforeAfterCases("dental-implants", "dental implants"),
     faq: [
       {
         question: "Can everyone get implants?",
@@ -186,6 +211,7 @@ export const services: Service[] = [
       "Avoid disturbing the extraction site",
       "Contact the clinic if pain, swelling, or bleeding worsens"
     ],
+    beforeAfterCases: createBeforeAfterCases("tooth-extraction", "tooth extraction"),
     faq: [
       {
         question: "Will I need a replacement tooth?",
@@ -227,6 +253,7 @@ export const services: Service[] = [
       "Book routine follow-ups as recommended",
       "Ask about sensitivity if it continues after cleaning"
     ],
+    beforeAfterCases: createBeforeAfterCases("dental-cleaning", "dental cleaning"),
     faq: [
       {
         question: "How often should I have a dental cleaning?",
@@ -268,6 +295,7 @@ export const services: Service[] = [
       "Contact the clinic if the bite feels high",
       "Continue routine cleaning and checkups"
     ],
+    beforeAfterCases: createBeforeAfterCases("fillings", "dental fillings"),
     faq: [
       {
         question: "Can every cavity be fixed with a filling?",
@@ -309,6 +337,7 @@ export const services: Service[] = [
       "Attend follow-up appointments",
       "Contact the clinic if swelling or pain worsens"
     ],
+    beforeAfterCases: createBeforeAfterCases("root-canal", "root canal treatment"),
     faq: [
       {
         question: "Does root canal always save the tooth?",
@@ -350,6 +379,7 @@ export const services: Service[] = [
       "Avoid biting very hard objects",
       "Attend routine checks to monitor fit and gum health"
     ],
+    beforeAfterCases: createBeforeAfterCases("crowns-and-bridges", "crowns and bridges"),
     faq: [
       {
         question: "How do I choose between a bridge and an implant?",
@@ -391,6 +421,7 @@ export const services: Service[] = [
       "Attend scheduled adjustments or reviews",
       "Use retainers as instructed after treatment"
     ],
+    beforeAfterCases: createBeforeAfterCases("orthodontics", "orthodontic treatment"),
     faq: [
       {
         question: "Am I too old for orthodontic treatment?",
@@ -433,6 +464,10 @@ export const services: Service[] = [
       "Attend all planned reviews and follow-up appointments",
       "Contact the clinic promptly if pain, swelling, bleeding, or other symptoms worsen"
     ],
+    beforeAfterCases: createBeforeAfterCases(
+      "maxillofacial-surgery",
+      "maxillofacial surgery"
+    ),
     faq: [
       {
         question: "Do all maxillofacial concerns require surgery?",

@@ -11,18 +11,18 @@ export const siteConfig = {
   whatsappNumber: "251985200000",
   addressShort: "Bole Atlas, Addis Ababa",
   addressFull: "Bole Atlas Traffic Light, Landmark Plaza, 2nd Floor, Addis Ababa",
-  hoursPlaceholder: "Opening hours: 2:30 to 12:00 LT",
-  mapUrl:
-    "https://www.google.com/maps/search/?api=1&query=Bole%20Atlas%20Traffic%20Light%20Landmark%20Plaza%20Addis%20Ababa",
+  plusCode: "2Q3H+GV5, Addis Ababa",
+  hoursDisplay: "Mon-Sat: 2:30 to 12:00 LT",
+  mapUrl: "https://www.google.com/maps?cid=9320438574750211354",
   mapEmbedUrl:
-    "https://www.google.com/maps?q=Bole%20Atlas%20Traffic%20Light%20Landmark%20Plaza%20Addis%20Ababa&output=embed",
-  ogImage: "/images/og-placeholder.svg",
+    "https://www.google.com/maps?q=Aya%20Speciality%20Dental%20Clinic%2C%202Q3H%2BGV5%2C%20Addis%20Ababa&output=embed",
+  ogImage: "/images/hero/aya-reception.jpg",
   logoPath: "/logo/aya-dental-studio-logo.webp",
   faviconPath: "/logo/aya-dental-studio-icon.png",
   socialLinks: {
-    facebook: "#todo-facebook",
-    instagram: "#todo-instagram",
-    tiktok: "#todo-tiktok"
+    facebook:
+      "https://www.facebook.com/p/Aya-Speciality-Dental-Clinic-61573053872342/",
+    instagram: "https://www.instagram.com/aya_speciality_dental_clinic/"
   }
 } as const;
 

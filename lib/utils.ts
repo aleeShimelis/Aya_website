@@ -20,7 +20,7 @@ export function absoluteUrl(path = "") {
 
 export function formatDateForDisplay(value: string) {
   if (!value) {
-    return "To be confirmed";
+    return "Not provided";
   }
 
   const date = new Date(`${value}T12:00:00`);

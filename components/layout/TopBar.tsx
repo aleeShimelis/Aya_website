@@ -19,7 +19,7 @@ export function TopBar() {
           </span>
           <span className="flex items-center gap-2">
             <Clock className="h-4 w-4" aria-hidden="true" />
-            {siteConfig.hoursPlaceholder}
+            {siteConfig.hoursDisplay}
           </span>
         </div>
       </div>

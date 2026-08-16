@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { PageHero } from "@/components/sections/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Card } from "@/components/ui/Card";
@@ -94,6 +95,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </Card>
         </div>
       </section>
+      <BeforeAfterSection serviceTitle={service.title} cases={service.beforeAfterCases} />
       <section className="section-padding bg-muted-bg">
         <div className="container-narrow">
           <h2 className="font-serif text-3xl font-semibold text-charcoal">Questions about {service.shortTitle}</h2>

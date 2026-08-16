@@ -126,9 +126,8 @@ export function AppointmentForm() {
         <div className="mt-6 rounded-card bg-muted-bg p-4 text-sm text-muted-text">
           <p className="font-semibold text-charcoal">Next step</p>
           <p className="mt-1">
-            Clinic staff should confirm the appointment before your visit. Location placeholder:
-            {" "}
-            {siteConfig.addressFull}.
+            Clinic staff should confirm the appointment before your visit. The clinic is at
+            {" "}{siteConfig.addressFull}.
           </p>
         </div>
         <div className="no-print mt-6 flex flex-wrap gap-3">

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { UserRound } from "lucide-react";
 
 const specialists = [
   {
@@ -22,10 +21,6 @@ const specialists = [
     imageSrc: "/images/team/maxillofacial-surgeon.png",
     imageAlt: "Dr. Tewodros Molla, chief maxilofacial surgeon at Aya Dental Studio",
     imagePosition: "22% 8%"
-  },
-  {
-    name: "Name to be confirmed",
-    title: "Specialty to be confirmed"
   }
 ] as const;
 
@@ -65,25 +60,18 @@ export function TeamPreview() {
         </div>
 
         <div className="team-specialist-grid">
-          {specialists.map((specialist, index) => (
-            <article className="team-specialist" key={`${specialist.name}-${index}`}>
+          {specialists.map((specialist) => (
+            <article className="team-specialist" key={specialist.name}>
               <div className="team-specialist-portrait">
-                {"imageSrc" in specialist ? (
-                  <Image
-                    src={specialist.imageSrc}
-                    alt={specialist.imageAlt}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                    quality={90}
-                    className="team-specialist-image"
-                    style={{ objectPosition: specialist.imagePosition }}
-                  />
-                ) : (
-                  <div className="team-specialist-placeholder" aria-label="Specialist photo pending">
-                    <UserRound aria-hidden="true" />
-                    <span>Photo pending</span>
-                  </div>
-                )}
+                <Image
+                  src={specialist.imageSrc}
+                  alt={specialist.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, 50vw"
+                  quality={90}
+                  className="team-specialist-image"
+                  style={{ objectPosition: specialist.imagePosition }}
+                />
               </div>
               <div className="team-specialist-caption">
                 <h4>{specialist.name}</h4>

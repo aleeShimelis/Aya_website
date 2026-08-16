@@ -17,6 +17,7 @@ export function organizationSchema() {
     logo: absoluteUrl(siteConfig.logoPath),
     image: absoluteUrl(siteConfig.ogImage),
     telephone: siteConfig.phonePrimaryDisplay,
+    hasMap: siteConfig.mapUrl,
     address: {
       "@type": "PostalAddress",
       streetAddress: "Bole Atlas Traffic Light, Landmark Plaza, 2nd Floor",
@@ -25,18 +26,18 @@ export function organizationSchema() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: "TODO",
-      longitude: "TODO"
+      latitude: 9.0037664,
+      longitude: 38.7797258
     },
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        opens: "TODO",
-        closes: "TODO"
+        opens: "08:30",
+        closes: "18:00"
       }
     ],
-    sameAs: Object.values(siteConfig.socialLinks).filter((link) => !link.startsWith("#"))
+    sameAs: Object.values(siteConfig.socialLinks)
   };
 }
 

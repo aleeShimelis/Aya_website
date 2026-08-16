@@ -20,7 +20,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="About the clinic"
         title="Designed for calm, transparent dental care."
-        description="Aya Dental Studio is prepared as a premium, patient-first clinic experience. Verified clinic story, dentist credentials, and real team photos should be added before launch."
+        description="Aya Dental Studio brings coordinated specialist dental care to Bole Atlas, with clear consultations and a calm clinical environment."
       />
       <section className="section-padding bg-background">
         <div className="container-site grid gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-stretch">
@@ -45,15 +45,17 @@ export default function AboutPage() {
             <Card>
               <h2 className="text-2xl font-semibold text-charcoal">Team information</h2>
               <p className="mt-3 text-muted-text">
-                TODO: add dentist name, credentials, years of experience, certifications,
-                affiliations, languages spoken, and approved team photography.
+                Care is led by Dr. Aymen Ayoub alongside Dr. Ismael Muze and Dr. Tewodros Molla,
+                bringing together expertise in endodontics, cosmetic dentistry, orthodontics, and
+                maxillofacial surgery.
               </p>
             </Card>
             <Card>
               <h2 className="text-2xl font-semibold text-charcoal">Clinic environment</h2>
               <p className="mt-3 text-muted-text">
-                TODO: add real reception, treatment room, equipment, and exterior/location photos.
-                Avoid patient-identifiable images without written consent.
+                The clinic gallery shows Aya Dental Studio&apos;s reception, patient areas, treatment
+                rooms, equipment, team, and location. Patient-identifiable media is published only
+                with appropriate consent.
               </p>
             </Card>
           </div>

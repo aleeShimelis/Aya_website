@@ -10,8 +10,8 @@ const slides = [
     alt: "Aya Dental Studio reception area"
   },
   {
-    src: "/images/hero/DrAymen.jpg",
-    alt: "Reception and waiting area at Aya Dental Studio"
+    src: "/images/hero/DrAymen.png",
+    alt: "Dr. Aymen Ayoub at Aya Dental Studio"
   }
 ] as const;
 

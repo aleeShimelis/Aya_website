@@ -64,8 +64,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Footer />
         <StickyContactBar />
         <JsonLd data={organizationSchema()} />
-        {/* TODO: Add Amharic language routing with next-intl after approved translations exist. */}
-        {/* TODO: Replace placeholders with final Aya Dental Studio logo and real clinic media. */}
         <noscript>
           {siteConfig.name} works best with JavaScript enabled for forms and interactive menus.
         </noscript>

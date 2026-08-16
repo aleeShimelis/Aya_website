@@ -7,7 +7,7 @@ export const faqs = [
   {
     question: "Where is Aya Dental Studio located?",
     answer:
-      "The current location placeholder is Bole Atlas Traffic Light, Landmark Plaza, 2nd Floor, Addis Ababa. TODO: confirm final map pin and clinic directions."
+      "Aya Dental Studio is at Bole Atlas Traffic Light, Landmark Plaza, 2nd Floor, Addis Ababa. Use Google Maps Plus Code 2Q3H+GV5, Addis Ababa for the clinic pin."
   },
   {
     question: "Can I choose the service I need before visiting?",
@@ -17,12 +17,12 @@ export const faqs = [
   {
     question: "Do you offer emergency dental care?",
     answer:
-      "TODO: confirm emergency care policy, hours, and triage process with the clinic before publishing."
+      "For an urgent dental concern, call the clinic directly so the team can advise you about current availability. The website does not provide emergency diagnosis or guarantee after-hours treatment."
   },
   {
     question: "Can I bring my child or family member?",
     answer:
-      "Families are welcome to request appointments. TODO: confirm pediatric service scope and family appointment policy."
+      "A parent, guardian, or family member may request an appointment through the website. The clinic will confirm whether the requested service is suitable when arranging the visit."
   },
   {
     question: "Will my information stay private?",
@@ -32,6 +32,6 @@ export const faqs = [
   {
     question: "Do you accept insurance or payment plans?",
     answer:
-      "TODO: confirm payment methods, insurance details, and financing options with the clinic."
+      "Please contact the clinic before your visit to confirm current payment options. The website does not currently advertise insurance coverage or financing plans."
   }
 ] as const;
