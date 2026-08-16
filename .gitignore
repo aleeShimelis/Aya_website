@@ -20,5 +20,11 @@ cloudflare-env.d.ts
 .lighthouse-report.*
 .wrangler-preview.*.log
 .preview.*.log
-docs
-codex_prompt.md
+# Local project notes, owner runbooks, and assistant instructions
+/docs/
+/README.md
+/CLOUDFLARE-DEPLOYMENT.md
+/codex_prompt.md
+/AGENTS.md
+/CLAUDE.md
+/public/images/services/before-after/README.md
