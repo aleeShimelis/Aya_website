@@ -6,7 +6,7 @@ import { contactActions, siteConfig } from "@/lib/constants";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-charcoal text-card-bg">
+    <footer className="site-footer border-t border-border bg-charcoal text-card-bg">
       <div className="container-site grid gap-10 py-12 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
         <div>
           <p className="font-serif text-3xl font-semibold">{siteConfig.name}</p>

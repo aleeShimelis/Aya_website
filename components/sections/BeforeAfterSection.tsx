@@ -3,28 +3,28 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ImageOff } from "lucide-react";
-import type { BeforeAfterCase } from "@/content/services";
+import type { BeforeAfterImage } from "@/content/services";
 
 type BeforeAfterSectionProps = {
   serviceTitle: string;
-  cases?: BeforeAfterCase[];
+  images?: BeforeAfterImage[];
 };
 
 type ComparisonImageProps = {
-  label: "Case 1" | "Case 2";
-  src?: string;
-  alt?: string;
+  label: string;
+  src: string;
+  alt: string;
 };
 
 function ComparisonImage({ label, src, alt }: ComparisonImageProps) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
-  const canShowImage = Boolean(src && alt && failedSrc !== src);
+  const canShowImage = failedSrc !== src;
 
   return (
     <figure className="before-after-frame">
       <figcaption className="before-after-label">{label}</figcaption>
       <div className="before-after-media">
-        {canShowImage && src && alt ? (
+        {canShowImage ? (
           <Image
             src={src}
             alt={alt}
@@ -44,8 +44,10 @@ function ComparisonImage({ label, src, alt }: ComparisonImageProps) {
   );
 }
 
-export function BeforeAfterSection({ serviceTitle, cases = [] }: BeforeAfterSectionProps) {
-  const comparisons = cases.length > 0 ? cases : [null];
+export function BeforeAfterSection({ serviceTitle, images = [] }: BeforeAfterSectionProps) {
+  if (images.length === 0) {
+    return null;
+  }
 
   return (
     <section className="before-after-section section-padding bg-background" aria-labelledby="before-after-title">
@@ -58,31 +60,21 @@ export function BeforeAfterSection({ serviceTitle, cases = [] }: BeforeAfterSect
             </h2>
           </div>
           <p>
-            View real {serviceTitle.toLowerCase()} cases when clinic-approved photography is
-            available. Individual results vary and treatment suitability requires an assessment.
+            Browse clinic-approved {serviceTitle.toLowerCase()} comparison and treatment-stage
+            images. Each frame is shown in full so the original clinical view is not cropped.
           </p>
         </div>
 
-        <div className="before-after-cases">
-          {comparisons.map((comparison, index) => (
-            <article
-              className="before-after-case"
-              key={comparison?.comparisonOneSrc ?? `pending-${index}`}
-            >
-              <div className="before-after-pair">
-                <ComparisonImage
-                  label="Case 1"
-                  src={comparison?.comparisonOneSrc}
-                  alt={comparison?.comparisonOneAlt}
-                />
-                <ComparisonImage
-                  label="Case 2"
-                  src={comparison?.comparisonTwoSrc}
-                  alt={comparison?.comparisonTwoAlt}
-                />
-              </div>
-              {comparison?.caption ? <p className="before-after-caption">{comparison.caption}</p> : null}
-            </article>
+        <div
+          className={`before-after-gallery${images.length === 1 ? " before-after-gallery-single" : ""}`}
+        >
+          {images.map((image, index) => (
+            <ComparisonImage
+              key={image.src}
+              label={`Image ${index + 1}`}
+              src={image.src}
+              alt={image.alt}
+            />
           ))}
         </div>
 

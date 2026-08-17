@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild:cloudflare": "node -e \"require('node:fs').rmSync('.open-next', { recursive: true, force: true })\"",
     "build:cloudflare": "opennextjs-cloudflare build",
     "start": "next start",
     "lint": "eslint .",

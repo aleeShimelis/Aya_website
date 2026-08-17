@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { AboutStudio } from "@/components/sections/AboutStudio";
-import { CareStages } from "@/components/sections/CareStages";
 import { FaqPreview } from "@/components/sections/FaqPreview";
 import { FinalCta } from "@/components/sections/FinalCta";
 import { GoogleReviews } from "@/components/sections/GoogleReviews";
@@ -27,7 +26,6 @@ export default function HomePage() {
       <ServicesPreview />
       <WhyPatientsChooseAya />
       <InsideStudioTour />
-      <CareStages />
       <TeamPreview />
       <PatientJourney />
       <GoogleReviews />

@@ -29,7 +29,7 @@ export const serviceGroups: ServiceGroup[] = [
     title: "Cosmetic Care",
     description:
       "Consultation-led whitening and veneer planning for patients seeking a refreshed, natural-looking smile.",
-    imageSrc: "/images/services/cosmetic-care.jpeg",
+    imageSrc: "/images/services/cosmetic-care.jpg",
     imageAlt: "Before and after comparison of cosmetic dental care",
     serviceSlugs: ["teeth-whitening", "veneers"]
   },

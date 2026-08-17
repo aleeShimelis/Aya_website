@@ -3,7 +3,7 @@ import Image from "next/image";
 const specialists = [
   {
     name: "Dr. Aymen Ayoub",
-    title: "Senior Surgeon, Endodontist and Cosmetic Specialist",
+    title: "Senior Dental Surgeon, Endodontist and Cosmetic Specialist",
     imageSrc: "/images/team/lead-clinician.jpg",
     imageAlt: "Dr. Aymen Ayoub, senior surgeon, endodontist, and cosmetic specialist at Aya Dental Studio",
     imagePosition: "22% 8%"

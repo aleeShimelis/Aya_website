@@ -10,7 +10,7 @@ import { createMetadata } from "@/lib/seo";
 export const metadata: Metadata = createMetadata({
   title: "About Aya Dental Studio | Dental Clinic in Addis Ababa",
   description:
-    "Learn about Aya Dental Studio, a calm and patient-first dental clinic near Bole Atlas in Addis Ababa.",
+    "Meet the Aya Dental Studio team and learn about its specialist dental care, Bole Atlas location, and opening hours.",
   path: "/about"
 });
 
@@ -18,9 +18,9 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About the clinic"
-        title="Designed for calm, transparent dental care."
-        description="Aya Dental Studio brings coordinated specialist dental care to Bole Atlas, with clear consultations and a calm clinical environment."
+        eyebrow="About Aya Dental Studio"
+        title="Specialist dental care at Bole Atlas."
+        description="Located on the second floor of Landmark Plaza, Aya Dental Studio brings preventive, restorative, cosmetic, orthodontic, endodontic, and maxillofacial care together in one clinic."
       />
       <section className="section-padding bg-background">
         <div className="container-site grid gap-10 lg:grid-cols-[1.3fr_0.7fr] lg:items-stretch">
@@ -36,10 +36,11 @@ export default function AboutPage() {
           </div>
           <div className="space-y-5">
             <Card>
-              <h2 className="text-2xl font-semibold text-charcoal">Clinic values</h2>
+              <h2 className="text-2xl font-semibold text-charcoal">Consultation-led care</h2>
               <p className="mt-3 text-muted-text">
-                The site should present care as careful, clear, and human. Treatment decisions
-                should be explained in plain language and confirmed through consultation.
+                Each visit begins with understanding the concern, examining the available options,
+                and explaining the recommended next steps. Treatment is planned only after the
+                clinical findings, timing, alternatives, and expected aftercare have been discussed.
               </p>
             </Card>
             <Card>
@@ -51,11 +52,11 @@ export default function AboutPage() {
               </p>
             </Card>
             <Card>
-              <h2 className="text-2xl font-semibold text-charcoal">Clinic environment</h2>
+              <h2 className="text-2xl font-semibold text-charcoal">Visit the studio</h2>
               <p className="mt-3 text-muted-text">
-                The clinic gallery shows Aya Dental Studio&apos;s reception, patient areas, treatment
-                rooms, equipment, team, and location. Patient-identifiable media is published only
-                with appropriate consent.
+                Find Aya Dental Studio at Bole Atlas Traffic Light, Landmark Plaza, 2nd Floor,
+                Addis Ababa. The clinic is open Monday to Saturday from 2:30 to 12:00 LT, and visits
+                can be requested online, by phone, or through WhatsApp before staff confirmation.
               </p>
             </Card>
           </div>

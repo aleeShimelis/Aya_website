@@ -1,6 +1,16 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
+
+export const metadata: Metadata = {
+  title: "Page Not Found | Aya Dental Studio",
+  description: "The requested Aya Dental Studio page could not be found.",
+  robots: {
+    index: false,
+    follow: false
+  }
+};
 
 export default function NotFound() {
   return (

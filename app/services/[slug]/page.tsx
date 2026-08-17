@@ -95,7 +95,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </Card>
         </div>
       </section>
-      <BeforeAfterSection serviceTitle={service.title} cases={service.beforeAfterCases} />
+      <BeforeAfterSection serviceTitle={service.title} images={service.beforeAfterImages} />
       <section className="section-padding bg-muted-bg">
         <div className="container-narrow">
           <h2 className="font-serif text-3xl font-semibold text-charcoal">Questions about {service.shortTitle}</h2>

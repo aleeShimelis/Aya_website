@@ -1,13 +1,14 @@
 # Service before-and-after images
 
-Each image should already contain its stitched before-and-after comparison. Create one folder per
-service using its URL slug, then place the two complete comparison images inside it:
+Create one folder per service using its URL slug. Add every approved comparison or treatment-stage
+image in display order, using consecutive file names beginning with `case-1.jpg`:
 
 ```text
 before-after/
   veneers/
     case-1.jpg
     case-2.jpg
+    case-3.jpg
   teeth-whitening/
     case-1.jpg
     case-2.jpg
@@ -26,18 +27,14 @@ Available service slugs:
 - `orthodontics`
 - `maxillofacial-surgery`
 
-Connect a pair in the matching service object in `content/services.ts`:
+Update the matching number in `beforeAfterImageCounts` in `content/services.ts`. Use `0` when a
+service has no approved images. The gallery will then render exactly that many frames and will hide
+the entire before-and-after section when the count is zero.
 
 ```ts
-beforeAfterCases: [
-  {
-    comparisonOneSrc: "/images/services/before-after/veneers/case-1.jpg",
-    comparisonOneAlt: "First stitched before-and-after veneer case at Aya Dental Studio",
-    comparisonTwoSrc: "/images/services/before-after/veneers/case-2.jpg",
-    comparisonTwoAlt: "Second stitched before-and-after veneer case at Aya Dental Studio",
-    caption: "Clinic-approved case description without identifying patient information."
-  }
-]
+const beforeAfterImageCounts = {
+  veneers: 3
+};
 ```
 
 Use only clinic-approved photography with documented patient consent. Remove identifying metadata

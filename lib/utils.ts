@@ -13,7 +13,7 @@ export function sanitizeText(value: string) {
 }
 
 export function absoluteUrl(path = "") {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.ayadentalstudio.com";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ayadentalstudio.com";
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   return `${baseUrl.replace(/\/$/, "")}${normalizedPath}`;
 }

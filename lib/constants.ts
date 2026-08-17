@@ -3,7 +3,7 @@ export const siteConfig = {
   secondaryName: "Aya Speciality Dental Clinic",
   description:
     "Calm, specialist dental care for healthier smiles in Addis Ababa.",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://www.ayadentalstudio.com",
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://ayadentalstudio.com",
   phonePrimary: "+251985200000",
   phonePrimaryDisplay: "+251 985 200 000",
   phoneSecondary: "+251985300000",

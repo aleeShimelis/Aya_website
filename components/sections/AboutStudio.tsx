@@ -1,26 +1,25 @@
-import { ClipboardCheck, HeartHandshake, ShieldCheck, Sparkles } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const philosophyPoints = [
   {
     title: "Calm visits",
     description: "A quieter appointment experience for patients who want care explained without pressure.",
-    icon: HeartHandshake
+    iconSrc: "/icons/dental/tooth.svg"
   },
   {
     title: "Clear explanations",
     description: "Plain-language guidance before decisions are made, with consultation leading the plan.",
-    icon: ClipboardCheck
+    iconSrc: "/icons/dental/odontology.svg"
   },
   {
     title: "Clean environment",
     description: "A carefully prepared clinic setting, ready for verified photography before launch.",
-    icon: Sparkles
+    iconSrc: "/icons/dental/dental-hygiene.svg"
   },
   {
     title: "Thoughtful planning",
     description: "Treatment options should be considered around comfort, timing, and long-term oral health.",
-    icon: ShieldCheck
+    iconSrc: "/icons/dental/odontology-implant.svg"
   }
 ] as const;
 
@@ -40,9 +39,11 @@ export function AboutStudio() {
             <li key={point.title} className="about-value">
               <div className="about-value-content">
                 <div className="about-value-title">
-                  <span className="about-value-icon" aria-hidden="true">
-                    <point.icon />
-                  </span>
+                  <span
+                    className="about-value-icon"
+                    style={{ "--about-icon": `url("${point.iconSrc}")` } as React.CSSProperties}
+                    aria-hidden="true"
+                  />
                   <h3>{point.title}</h3>
                 </div>
                 <p>{point.description}</p>

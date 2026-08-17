@@ -48,7 +48,7 @@ export function GalleryGrid({ items }: GalleryGridProps) {
       {items.map((item, index) => (
         <figure
           key={item.src}
-          className="gallery-image relative aspect-[5/4] overflow-hidden rounded-card border border-border bg-card-bg"
+          className="gallery-image relative aspect-[4/5] overflow-hidden rounded-card border border-border bg-card-bg"
           style={{ "--gallery-delay": `${(index % 3) * 80}ms` } as React.CSSProperties}
         >
           <Image
