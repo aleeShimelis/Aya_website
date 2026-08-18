@@ -14,9 +14,15 @@
   "observability": {
     "enabled": true
   },
+  "routes": [
+    {
+      "pattern": "ayadentalstudio.com",
+      "custom_domain": true
+    }
+  ],
   "vars": {
     "FORM_DELIVERY_PROVIDER": "resend",
     "RATE_LIMIT_IP_HEADER": "cf-connecting-ip",
-    "TURNSTILE_ALLOWED_HOSTNAMES": "aya-dental-studio.aya-dental-studio.workers.dev"
+    "TURNSTILE_ALLOWED_HOSTNAMES": "ayadentalstudio.com"
   }
 }
