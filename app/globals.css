@@ -479,6 +479,56 @@ button {
   line-height: 1.7;
 }
 
+.why-aya-section {
+  border-block: 1px solid var(--color-border);
+  background: var(--color-muted-bg);
+}
+
+.why-aya-layout {
+  display: grid;
+  gap: clamp(2.75rem, 6vw, 6rem);
+}
+
+.why-aya-reasons {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-charcoal);
+  list-style: none;
+}
+
+.why-aya-reason {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.why-aya-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-teal);
+  -webkit-mask: var(--why-aya-icon) center / contain no-repeat;
+  mask: var(--why-aya-icon) center / contain no-repeat;
+}
+
+.why-aya-reason h3 {
+  color: var(--color-charcoal);
+  font-family: var(--font-space-grotesk), var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.why-aya-reason p {
+  max-width: 38rem;
+  margin-top: 0.5rem;
+  color: var(--color-muted-text);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
 .google-review-slide {
   animation: google-review-enter 320ms ease-out;
 }
@@ -549,6 +599,32 @@ button {
 
   .about-values {
     grid-column: span 7 / span 7;
+  }
+
+  .why-aya-layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .why-aya-intro {
+    position: sticky;
+    top: 9rem;
+    grid-column: span 5 / span 5;
+  }
+
+  .why-aya-reasons {
+    grid-column: span 7 / span 7;
+  }
+
+  .why-aya-reason {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    gap: 1.5rem;
+    padding-block: 1.75rem;
+  }
+
+  .why-aya-icon {
+    width: 2.75rem;
+    height: 2.75rem;
   }
 }
 
@@ -1321,8 +1397,12 @@ button {
 
   .hero-section::before {
     background:
-      linear-gradient(90deg, rgb(23 33 36 / 0.94), rgb(23 33 36 / 0.72)),
-      linear-gradient(0deg, rgb(23 33 36 / 0.45), rgb(23 33 36 / 0.12) 52%);
+      linear-gradient(90deg, rgb(23 33 36 / 0.68), rgb(23 33 36 / 0.22)),
+      linear-gradient(0deg, rgb(23 33 36 / 0.58), rgb(23 33 36 / 0.08) 58%);
+  }
+
+  .hero-copy > p {
+    text-shadow: 0 2px 14px rgb(0 0 0 / 0.62);
   }
 
   .studio-tour-section::before {
@@ -1361,6 +1441,17 @@ button {
     justify-content: flex-start;
     padding-top: 9rem;
     padding-bottom: 9rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .care-group-media {
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+  }
+
+  .care-group-image {
+    object-fit: contain;
   }
 }
 
