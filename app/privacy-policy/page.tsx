@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
         title="How we handle website information."
         description="This notice explains the personal information processed through the Aya Dental Studio website and the choices available to you."
       />
-      <LegalDocument effectiveDate="17 August 2026">
+      <LegalDocument effectiveDate="20 August 2026">
         <LegalSection id="who-we-are" title="1. Who is responsible for your information">
           <p>
             Aya Speciality Dental Clinic, also presented on this website as Aya Dental Studio, is
@@ -103,22 +103,34 @@ export default function PrivacyPolicyPage() {
         </LegalSection>
 
         <LegalSection id="sharing" title="6. Service providers and disclosure">
-          <p>The website currently relies on the following service categories:</p>
+          <p>The website currently relies on the following service providers:</p>
           <LegalList>
             <li>
-              <strong className="text-charcoal">Cloudflare:</strong> website hosting, delivery,
-              security, and Turnstile bot verification.
+              <strong className="text-charcoal">Cloudflare:</strong> hosts, delivers, and protects
+              the website. Cloudflare may process IP addresses, request headers, request metadata,
+              and browser or device signals needed to serve requests and apply security controls.
+            </li>
+            <li>
+              <strong className="text-charcoal">Cloudflare Turnstile:</strong> evaluates network,
+              browser, and device signals and issues a short-lived verification token. The website
+              verifies that token and uses the verification result before accepting a form request.
+            </li>
+            <li>
+              <strong className="text-charcoal">Upstash:</strong> provides Redis-based rate
+              limiting. The application sends HMAC-derived rate-limit identifiers, counters, and
+              expiry information to Upstash. It does not send raw IP addresses, names, phone
+              numbers, messages, appointment details, or Turnstile tokens to Upstash.
+            </li>
+            <li>
+              <strong className="text-charcoal">Resend:</strong> delivers successful, validated
+              form submissions to the clinic inbox. Resend processes the submitted contact details,
+              message, submission reference, and, for appointment requests, the selected service and
+              preferred date, together with the email delivery metadata needed to send the message.
             </li>
             <li>
               <strong className="text-charcoal">Google Maps:</strong> an embedded clinic map on the
               contact page. Google receives information directly from your browser when the map
               loads.
-            </li>
-            <li>
-              <strong className="text-charcoal">Approved form infrastructure:</strong> the website
-              will accept production submissions only after approved rate-limiting and email
-              delivery providers are configured. This notice will be updated to identify material
-              changes before those providers begin processing submissions.
             </li>
           </LegalList>
           <p>
@@ -132,20 +144,20 @@ export default function PrivacyPolicyPage() {
 
         <LegalSection id="international-transfers" title="7. International processing">
           <p>
-            Cloudflare, Google, and any approved infrastructure provider may process technical or
-            submitted information in countries outside Ethiopia. Aya Dental Studio will use such
-            providers only where the clinic has assessed the processing, documented an applicable
-            legal transfer basis, and adopted the contractual, technical, and organizational
-            safeguards required by Ethiopian law. Locally collected personal data will be handled
-            in accordance with applicable Ethiopian data-sovereignty and transfer requirements.
+            Cloudflare, Turnstile, Upstash, Resend, and Google may process technical or submitted
+            information in countries outside Ethiopia. Aya Dental Studio will use such providers
+            only where the clinic has assessed the processing, documented an applicable legal
+            transfer basis, and adopted the contractual, technical, and organizational safeguards
+            required by Ethiopian law. Locally collected personal data will be handled in accordance
+            with applicable Ethiopian data-sovereignty and transfer requirements.
           </p>
         </LegalSection>
 
         <LegalSection id="retention" title="8. How long information is kept">
           <LegalList>
             <li>
-              General website inquiries and unsuccessful appointment requests are normally deleted
-              or anonymized within 12 months after the last related communication.
+              Unsuccessful general inquiries and appointment requests are normally deleted within
+              six months of the last related communication.
             </li>
             <li>
               Short-lived verification tokens are used to validate a request and are not retained
@@ -156,8 +168,8 @@ export default function PrivacyPolicyPage() {
               investigate an incident, or meet legal obligations.
             </li>
             <li>
-              If an inquiry leads to treatment, relevant information may become part of a separate
-              clinical record and be retained under the clinic&apos;s clinical and legal retention
+              If a request leads to treatment, relevant information may be transferred into the
+              clinic&apos;s separate clinical record and retained under applicable clinical and legal
               requirements.
             </li>
           </LegalList>

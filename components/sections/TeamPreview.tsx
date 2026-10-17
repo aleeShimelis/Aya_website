@@ -3,23 +3,23 @@ import Image from "next/image";
 const specialists = [
   {
     name: "Dr. Aymen Ayoub",
-    title: "Senior Dental Surgeon, Endodontist and Cosmetic Specialist",
+    title: "Chief Dental Surgeon, Endodontist and Cosmetic Specialist",
     imageSrc: "/images/team/lead-clinician.jpg",
     imageAlt: "Dr. Aymen Ayoub, senior surgeon, endodontist, and cosmetic specialist at Aya Dental Studio",
     imagePosition: "22% 8%"
   },
   {
     name: "Dr. Ismael Muze",
-    title: "Chief Orthodontist",
+    title: "DMD, Expert Orthodontist, Orthodontics & Dentofacial Orthopedies Specialist",
     imageSrc: "/images/team/orthodontist.png",
-    imageAlt: "Dr. Ismael Muze, Chief Orthodontist at Aya Dental Studio",
+    imageAlt: "Dr. Ismael Muze, DMD, Expert Orthodontist, Orthodontics & Dentofacial Orthopedies Specialist",
     imagePosition: "22% 8%"
   },
   {
     name: "Dr. Tewodros Molla",
-    title: "Chief Maxillofacial Surgeon",
+    title: "DMD, Expert Maxillofacial Surgeon, Implantology Specialist",
     imageSrc: "/images/team/maxillofacial-surgeon.png",
-    imageAlt: "Dr. Tewodros Molla, chief maxilofacial surgeon at Aya Dental Studio",
+    imageAlt: "Dr. Tewodros Molla, DMD, Expert Maxillofacial Surgeon, Implantology Specialist",
     imagePosition: "22% 8%"
   }
 ] as const;

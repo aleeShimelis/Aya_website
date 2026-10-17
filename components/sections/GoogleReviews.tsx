@@ -8,6 +8,12 @@ import { siteConfig } from "@/lib/constants";
 
 const reviews = [
   {
+    author: "Michael Tesfaye",
+    quote: "What an incredible dental center it is. With a great hospitality. 10/10",
+    imageSrc: "/images/reviews/michael-tesfaye.jpg",
+    imageAlt: "Google profile image for Michael Tesfaye"
+  },
+  {
     author: "Alazar Shimelis",
     quote:
       "I was very pleased with the treatment i received. The staff are very friendly and also very professional.",
@@ -60,7 +66,7 @@ export function GoogleReviews() {
         <div>
           <SectionHeading
             eyebrow="Patient feedback"
-            title="5.0 from two Google reviews."
+            title="5.0 from three Google reviews."
             description="Every review in this carousel is published on Aya Speciality Dental Clinic's public Google Business Profile."
           />
           <a

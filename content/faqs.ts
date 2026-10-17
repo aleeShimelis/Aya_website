@@ -27,7 +27,7 @@ export const faqs = [
   {
     question: "Will my information stay private?",
     answer:
-      "The site is structured to be privacy-conscious and HIPAA-ready, pending provider setup and legal review. Do not submit detailed medical history through the basic forms."
+      "The website uses HTTPS, bot checks, input validation, and rate limiting. Please keep messages brief and do not submit detailed medical history or records through the forms."
   },
   {
     question: "Do you accept insurance or payment plans?",

@@ -13,7 +13,7 @@ const philosophyPoints = [
   },
   {
     title: "Clean environment",
-    description: "A carefully prepared clinic setting, ready for verified photography before launch.",
+    description: "A carefully prepared clinic setting shown through real photographs of the studio.",
     iconSrc: "/icons/dental/dental-hygiene.svg"
   },
   {

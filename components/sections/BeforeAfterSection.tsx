@@ -36,7 +36,7 @@ function ComparisonImage({ label, src, alt }: ComparisonImageProps) {
         ) : (
           <div className="before-after-placeholder">
             <ImageOff aria-hidden="true" />
-            <span>Approved comparison photo pending</span>
+            <span>Comparison image unavailable</span>
           </div>
         )}
       </div>
